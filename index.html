@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Prata&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Bridgr — Find Your Campus Expert</title>
+<meta name="description" content="Bridgr connects students with nearby peers who can solve their problems in 10 minutes."/>
+
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/tokens.css"/>
+<link rel="stylesheet" href="css/pod.css"/>
+<link rel="stylesheet" href="css/styles.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div id="reactNav"></div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-inner">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="hero-content">
+      <div class="hero-badge">🎓 now live on campus</div>
+      <h1 class="hero-title" id="heroTitle" style="position:relative;">
+        <svg class="doodle-svg doodle-star doodle-rotate" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" />
+        </svg>
+        <span>Invest in your</span>
+        <span>own <span class="doodle-box">passion</span></span>
+      </h1>
+      <p class="hero-sub">Someone three floors above you solved this exact problem last Tuesday. Bridgr finds them before you lose your mind.</p>
+      <div class="hero-btns" style="position:relative;">
+        <svg class="doodle-svg doodle-arrow doodle-float doodle-draw" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 20 Q 50 10, 80 80 M70 60 L80 80 L60 85" />
+        </svg>
+        <a href="#cta" class="btn-primary btn-lg">😵 I'm stuck</a>
+        <a href="#cta" class="btn-ghost btn-lg">🧠 I can help</a>
+      </div>
+    </div>
+    <div class="floating-cards" id="reactFloatingCards"></div>
+  </div>
+</section>
+
+<!-- COLLEGE REALITY -->
+<section class="section reality" id="reality">
+  <div class="container">
+    <div class="section-tag">😮 the struggle is real</div>
+    <h2 class="section-title" style="position:relative;">
+      <svg class="doodle-svg doodle-squiggle doodle-draw" viewBox="0 0 200 50" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round">
+        <path d="M10 25 Q 30 5, 50 25 T 90 25 T 130 25 T 170 25" />
+      </svg>
+      Every student's 2AM Tuesday
+    </h2>
+    <p class="section-sub">We've all been there. The question is: why suffer alone?</p>
+    <div class="cards-grid">
+      <div class="card card-glow reveal">
+        <div class="card-icon">🕐</div>
+        <h3>6 hours debugging one function</h3>
+        <p>The error was a missing comma. You have never felt such rage and relief at the same time.</p>
+        <div class="card-tag">happens to literally everyone</div>
+      </div>
+      <div class="card card-glow reveal">
+        <div class="card-icon">📖</div>
+        <h3>Reading the same paragraph 14 times</h3>
+        <p>The concept still doesn't click. Your notes look like you blacked out halfway through.</p>
+        <div class="card-tag">it's not you, it's the textbook</div>
+      </div>
+      <div class="card card-glow reveal">
+        <div class="card-icon">🫥</div>
+        <h3>Too embarrassed to ask in class</h3>
+        <p>"Everyone else seems to get it." They don't. They're all waiting for someone else to ask.</p>
+        <div class="card-tag">the great academic illusion</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how" id="how">
+  <div class="container">
+    <div class="section-tag">⚙️ how it works</div>
+    <h2 class="section-title">Three steps to not failing</h2>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num">01</div>
+        <div class="step-icon">📝</div>
+        <h3>Post your problem</h3>
+        <p>Describe what's broken. No judgement. We've all Googled the same thing 50 times.</p>
+      </div>
+      <div class="step-line"></div>
+      <div class="step reveal">
+        <div class="step-num">02</div>
+        <div class="step-icon">📡</div>
+        <h3>Bridgr finds your people</h3>
+        <p>We ping students nearby who actually know this stuff. Like a bat-signal, but for debugging.</p>
+      </div>
+      <div class="step-line"></div>
+      <div class="step reveal">
+        <div class="step-num">03</div>
+        <div class="step-icon">⚡</div>
+        <h3>Quick 10-min session</h3>
+        <p>They swing by, you fix it, everyone goes home happy. No awkward emails required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAMPUS SUPERPOWERS -->
+<section class="section superpowers" id="superpowers">
+  <div class="container">
+    <div class="section-tag">🦸 campus superpowers</div>
+    <h2 class="section-title">Your campus has people like these</h2>
+    <p class="section-sub">They're real. They're nearby. And they're probably bored right now.</p>
+    <div class="profiles-grid" id="reactProfiles"></div>
+  </div>
+</section>
+
+
+<!-- CTA -->
+<section class="section cta-section" id="cta">
+  <div class="orb orb-cta-1"></div>
+  <div class="orb orb-cta-2"></div>
+  <div class="container cta-inner">
+    <h2 class="cta-title reveal">Stop suffering in silence.</h2>
+    <p class="cta-sub reveal">Your campus has the answer. You just need Bridgr to find it.</p>
+    <div class="cta-form reveal">
+      <input type="email" id="emailInput" placeholder="drop your college email" class="cta-input"/>
+      <button class="btn-primary btn-lg cta-btn" id="joinBtn">Drop my first problem →</button>
+    </div>
+    <div class="stats reveal">
+      <div class="stat"><span class="stat-num" data-target="847">0</span><span class="stat-label">problems solved</span></div>
+      <div class="stat"><span class="stat-num" data-target="1200">0</span><span class="stat-label">sessions done</span></div>
+      <div class="stat"><span class="stat-num" data-target="14">0</span><span class="stat-label">campuses</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="logo">BRIDGR</div>
+    <p class="footer-sub">Built by students who were tired of being stuck at 2am.</p>
+    <div class="footer-links">
+      <a href="#">GitHub</a><a href="#">Twitter</a><a href="#">Discord</a>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="js/react-components.js"></script>
+<script src="js/index-react.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

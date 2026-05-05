@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Room Finder — Bridgr</title>
+<meta name="description" content="Find and book available meeting rooms across campus in real time."/>
+
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/tokens.css"/>
+<link rel="stylesheet" href="css/rooms.css"/>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div id="reactNav"></div>
+</nav>
+
+<!-- HUD TOP BAR -->
+<div class="hud-top">
+  <div class="hud-stat"><span class="hud-num" id="hudFree">8</span><span class="hud-lbl">available</span></div>
+  <div class="hud-div"></div>
+  <div class="hud-stat"><span class="hud-num" id="hudOcc">6</span><span class="hud-lbl">occupied</span></div>
+  <div class="hud-div"></div>
+  <div class="hud-stat"><span class="hud-num" id="hudSoon">3</span><span class="hud-lbl">booked soon</span></div>
+  <div class="hud-div"></div>
+  <div class="hud-time" id="hudTime"></div>
+  <div class="hud-div"></div>
+  <div class="hud-live"><span class="live-dot"></span>LIVE</div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-row" id="filterRow">
+  <button class="fr-btn active" data-f="all">All Rooms</button>
+  <button class="fr-btn" data-f="available">🟢 Available</button>
+  <button class="fr-btn" data-f="soon">🟡 Opening Soon</button>
+  <button class="fr-btn" data-f="occupied">🔴 Occupied</button>
+  <div class="fr-sep"></div>
+  <button class="fr-btn" data-f="whiteboard">🖊 Whiteboard</button>
+  <button class="fr-btn" data-f="screen">📺 Screen</button>
+  <button class="fr-btn" data-f="ac">❄️ AC</button>
+  <div class="fr-sep"></div>
+  <div class="fr-cap">
+    <label class="fr-label">Min seats:</label>
+    <input type="range" id="capSlider" min="2" max="20" value="2" class="fr-slider"/>
+    <span id="capVal">2+</span>
+  </div>
+</div>
+
+<!-- MAIN LAYOUT -->
+<div class="main-layout">
+
+  <!-- LEFT: Floor plan map -->
+  <div class="map-panel" id="mapPanel">
+    <div class="map-header">
+      <div class="map-title">Campus Floor Plan</div>
+      <div class="floor-tabs">
+        <button class="fl-tab active" data-floor="1">Floor 1</button>
+        <button class="fl-tab" data-floor="2">Floor 2</button>
+        <button class="fl-tab" data-floor="3">Floor 3</button>
+        <button class="fl-tab" data-floor="lab">Lab Wing</button>
+      </div>
+    </div>
+    <div class="floor-map" id="floorMap">
+      <canvas id="floorCanvas"></canvas>
+      <div id="roomPins"></div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Room list -->
+  <div class="list-panel">
+    <div class="list-header">
+      <div class="list-title">All Rooms</div>
+      <div class="list-count" id="listCount">17 rooms</div>
+    </div>
+    <div class="room-list" id="roomList"></div>
+  </div>
+
+</div>
+
+<!-- ROOM DETAIL CARD -->
+<div class="room-card" id="roomCard">
+  <div class="rc-glow" id="rcGlow"></div>
+  <button class="rc-close" id="rcClose">✕</button>
+
+  <div class="rc-status-bar" id="rcStatusBar">
+    <span class="rc-status-dot" id="rcDot"></span>
+    <span class="rc-status-text" id="rcStatusText"></span>
+    <span class="rc-building" id="rcBuilding"></span>
+  </div>
+
+  <h2 class="rc-name" id="rcName"></h2>
+  <div class="rc-session" id="rcSession"></div>
+
+  <div class="rc-stats">
+    <div class="rc-stat"><div class="rc-stat-num" id="rcCap"></div><div class="rc-stat-lbl">seats</div></div>
+    <div class="rc-stat"><div class="rc-stat-num" id="rcFloor"></div><div class="rc-stat-lbl">floor</div></div>
+    <div class="rc-stat"><div class="rc-stat-num" id="rcUntil"></div><div class="rc-stat-lbl" id="rcUntilLbl"></div></div>
+  </div>
+
+  <div class="rc-equip-label">🔧 EQUIPMENT</div>
+  <div class="rc-equip" id="rcEquip"></div>
+
+  <div class="rc-timeline" id="rcTimeline">
+    <div class="rc-tl-label">📅 TODAY'S SCHEDULE</div>
+    <div class="rc-slots" id="rcSlots"></div>
+  </div>
+
+  <button class="rc-book" id="rcBook">Reserve this room →</button>
+  <p class="rc-hint" id="rcHint"></p>
+</div>
+
+<!-- BOOK MODAL -->
+<div class="book-backdrop" id="bookBackdrop">
+  <div class="book-modal" id="bookModal">
+    <button class="bm-close" id="bmClose">✕</button>
+    <div class="bm-tag">📅 reserve a room</div>
+    <h3 class="bm-title" id="bmTitle"></h3>
+    <div class="bm-fields">
+      <div class="bm-field">
+        <label class="bm-label">Your name</label>
+        <input type="text" id="bmName" class="bm-input" placeholder="Aryan Rai"/>
+      </div>
+      <div class="bm-field">
+        <label class="bm-label">Duration</label>
+        <div class="bm-durations" id="bmDurations">
+          <button class="dur-btn active" data-d="30">30 min</button>
+          <button class="dur-btn" data-d="60">1 hour</button>
+          <button class="dur-btn" data-d="90">90 min</button>
+          <button class="dur-btn" data-d="120">2 hours</button>
+        </div>
+      </div>
+      <div class="bm-field">
+        <label class="bm-label">Session type (optional)</label>
+        <input type="text" id="bmSession" class="bm-input" placeholder="e.g. React study group, DSA practice..."/>
+      </div>
+    </div>
+    <button class="bm-confirm" id="bmConfirm">Confirm booking ✓</button>
+    <p class="bm-hint">You'll get a confirmation ping. Don't ghost the room.</p>
+  </div>
+</div>
+
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="js/react-components.js"></script>
+<script>
+  (function renderRoomsNav() {
+    if (!window.BridgrReactComponents || !window.ReactDOM) return;
+    var root = document.getElementById("reactNav");
+    if (!root) return;
+    ReactDOM.createRoot(root).render(
+      window.BridgrReactComponents.e(window.BridgrReactComponents.Navbar, { currentPath: window.location.pathname })
+    );
+  })();
+</script>
+<script src="js/rooms-react.js"></script>
+<script src="js/rooms.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

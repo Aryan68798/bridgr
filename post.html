@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Post a Problem — Bridgr</title>
+<meta name="description" content="Send an SOS to campus. Bridgr finds someone nearby who can help in minutes."/>
+
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/tokens.css"/>
+<link rel="stylesheet" href="css/pod.css"/>
+<link rel="stylesheet" href="css/post.css"/>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+    <ul class="nav-links">
+
+      <li><a href="discover.html">Discover</a></li>
+      <li><a href="map.html">Campus Map</a></li>
+      <li><a href="rooms.html">Rooms</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-avatar" title="Login">AR</a>
+      <a href="post.html" class="btn-primary nav-cta nav-active-btn">Post a problem</a>
+    </div>
+  </div>
+</nav>
+
+<!-- REPETITION: Same orange/blue blobs + rotating star as all pages -->
+<div style="position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;" aria-hidden="true">
+  <div class="pod-blob pod-blob-orange" style="width:360px; height:500px; top:0; right:-30px; animation-delay:-1s;"></div>
+  <div class="pod-blob pod-blob-blue" style="width:220px; height:300px; bottom:-30px; left:5%; animation-delay:-6s;"></div>
+  <div class="pod-star" style="top:20%; left:2%; width:44px; height:44px; animation-duration:24s;">
+    <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="44" height="44"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/></svg>
+  </div>
+</div>
+
+<!-- ═══ FORM VIEW ═══ -->
+<main class="post-main" id="formView">
+  <div class="post-wrap">
+
+    <!-- Left: progress -->
+    <aside class="progress-panel" id="progressPanel">
+      <div class="pp-logo">BRIDGR</div>
+      <div class="pp-label">drop your SOS</div>
+      <div class="progress-steps" id="progressSteps">
+        <div class="pstep active" data-step="1">
+          <div class="pstep-dot"><span>1</span></div>
+          <div class="pstep-info"><div class="pstep-title">The damage</div><div class="pstep-sub">What exploded?</div></div>
+        </div>
+        <div class="pstep-line"></div>
+        <div class="pstep" data-step="2">
+          <div class="pstep-dot"><span>2</span></div>
+          <div class="pstep-info"><div class="pstep-title">The skill</div><div class="pstep-sub">Who can save you?</div></div>
+        </div>
+        <div class="pstep-line"></div>
+        <div class="pstep" data-step="3">
+          <div class="pstep-dot"><span>3</span></div>
+          <div class="pstep-info"><div class="pstep-title">Pain level</div><div class="pstep-sub">Be honest.</div></div>
+        </div>
+        <div class="pstep-line"></div>
+        <div class="pstep" data-step="4">
+          <div class="pstep-dot"><span>4</span></div>
+          <div class="pstep-info"><div class="pstep-title">The meetup</div><div class="pstep-sub">IRL or couch?</div></div>
+        </div>
+      </div>
+      <div class="pp-hint">30 seconds to post.<br/>Campus is scanning. 👀</div>
+    </aside>
+
+    <!-- Right: steps -->
+    <div class="steps-wrap">
+
+      <!-- Step 1: Title + description -->
+      <div class="fstep active" id="step1">
+        <div class="step-tag">💀 step 1 of 4 — the crime scene</div>
+        <h2 class="step-title">What broke?</h2>
+        <p class="step-sub">No judgment. Describe the disaster. We've all been here at 2am.</p>
+        <div class="field-group">
+          <label class="field-label" for="probTitle">Give the chaos a name <span class="req">*</span></label>
+          <input type="text" id="probTitle" class="field-input" placeholder="e.g. My useEffect is running 47 times and I want to cry" maxlength="120"/>
+          <div class="char-count" id="titleCount">0 / 120</div>
+        </div>
+        <div class="field-group">
+          <label class="field-label" for="probDesc">Describe the meltdown <span class="req">*</span></label>
+          <textarea id="probDesc" class="field-input field-textarea" placeholder="What did you expect? What actually happened? What cursed Stack Overflow answers did you try? More context = faster fix." rows="5" maxlength="500"></textarea>
+          <div class="char-count" id="descCount">0 / 500</div>
+        </div>
+        <div class="step-footer">
+          <div></div>
+          <button class="btn-next" id="next1" onclick="goStep(2)">Who can save me? →</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Skill -->
+      <div class="fstep" id="step2">
+        <div class="step-tag">🎯 step 2 of 4 — pick your poison</div>
+        <h2 class="step-title">What kind of wizard do you need?</h2>
+        <p class="step-sub">Best guess is fine. Wrong? The expert will figure it out in 30 seconds anyway.</p>
+        <div class="skill-chips" id="skillChips">
+          <button class="skchip" data-skill="React">⚛️ React</button>
+          <button class="skchip" data-skill="Python">🐍 Python</button>
+          <button class="skchip" data-skill="DSA">🧩 DSA</button>
+          <button class="skchip" data-skill="JavaScript">🌐 JavaScript</button>
+          <button class="skchip" data-skill="C++">⚡ C++</button>
+          <button class="skchip" data-skill="ML">🤖 ML</button>
+          <button class="skchip" data-skill="Git">🌿 Git</button>
+          <button class="skchip" data-skill="SQL">🗄️ SQL</button>
+          <button class="skchip" data-skill="Docker">🐳 Docker</button>
+          <button class="skchip" data-skill="UI Design">🎨 UI Design</button>
+          <button class="skchip" data-skill="Linux">🐧 Linux</button>
+          <button class="skchip" data-skill="Other">🤷 Other</button>
+        </div>
+        <div class="field-group" style="margin-top:20px">
+          <label class="field-label" for="customSkill">Not on the list? Just say it.</label>
+          <input type="text" id="customSkill" class="field-input" placeholder="e.g. Verilog, MATLAB, After Effects, Blender, idk..."/>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" onclick="goStep(1)">← Back</button>
+          <button class="btn-next" id="next2" onclick="goStep(3)">Urgency →</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Urgency -->
+      <div class="fstep" id="step3">
+        <div class="step-tag">🚨 step 3 of 4 — damage assessment</div>
+        <h2 class="step-title">On a scale of fine to crying...</h2>
+        <p class="step-sub">Be honest. Nobody here is judging you. We've all submitted broken code.</p>
+        <div class="urgency-cards" id="urgencyCards">
+          <button class="urg-card" data-urgency="chill">
+            <div class="urg-icon">😌</div>
+            <div class="urg-label">Chill</div>
+            <div class="urg-desc">No deadline. Just want to understand it.</div>
+          </button>
+          <button class="urg-card" data-urgency="soon">
+            <div class="urg-icon">⏰</div>
+            <div class="urg-label">Need it soon</div>
+            <div class="urg-desc">Submission in a day or two. Starting to sweat.</div>
+          </button>
+          <button class="urg-card" data-urgency="urgent">
+            <div class="urg-icon">🔥</div>
+            <div class="urg-label">Urgent</div>
+            <div class="urg-desc">Due tonight. Seriously panicking.</div>
+          </button>
+          <button class="urg-card" data-urgency="fire">
+            <div class="urg-icon">💀</div>
+            <div class="urg-label">ON FIRE</div>
+            <div class="urg-desc">Submission in an hour. Send help NOW.</div>
+          </button>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" onclick="goStep(2)">← Back</button>
+          <button class="btn-next" id="next3" onclick="goStep(4)">Almost done →</button>
+        </div>
+      </div>
+
+      <!-- Step 4: Meeting type -->
+      <div class="fstep" id="step4">
+        <div class="step-tag">📍 step 4 of 4 — almost free</div>
+        <h2 class="step-title">IRL or laptop?</h2>
+        <p class="step-sub">Pick a vibe. They'll find you.</p>
+        <div class="meet-cards" id="meetCards">
+          <button class="meet-card" data-meet="in-person">
+            <div class="meet-icon">🏫</div>
+            <div class="meet-label">Show up IRL</div>
+            <div class="meet-desc">They come to you. Old school. Gets things done. Bring snacks as tribute.</div>
+          </button>
+          <button class="meet-card" data-meet="online">
+            <div class="meet-icon">💻</div>
+            <div class="meet-label">Screen share</div>
+            <div class="meet-desc">Stay in bed. Share screen. Voice or video. Pajamas optional.</div>
+          </button>
+          <button class="meet-card" data-meet="either">
+            <div class="meet-icon">🤷</div>
+            <div class="meet-label">Don't care, just help</div>
+            <div class="meet-desc">You just want the bug gone. Whatever works for them.</div>
+          </button>
+        </div>
+        <div class="field-group" style="margin-top:20px">
+          <label class="field-label" for="location">📍 Where are you hiding right now? (optional)</label>
+          <input type="text" id="location" class="field-input" placeholder="e.g. Library 2nd floor crying, Block A Room 204, Canteen corner table..."/>
+        </div>
+        <div class="step-footer">
+          <button class="btn-back" onclick="goStep(3)">← Back</button>
+          <button class="btn-send" id="sendBtn" onclick="submitPost()">
+            <span id="sendLabel">🚨 Launch the SOS</span>
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<!-- ═══ SEARCHING VIEW ═══ -->
+<div class="searching-view" id="searchingView">
+  <div class="searching-inner">
+    <div class="radar-wrap">
+      <div class="radar">
+        <div class="radar-ring r1"></div>
+        <div class="radar-ring r2"></div>
+        <div class="radar-ring r3"></div>
+        <div class="radar-sweep"></div>
+        <div class="radar-center">📡</div>
+        <div class="radar-blip b1"></div>
+        <div class="radar-blip b2"></div>
+        <div class="radar-blip b3"></div>
+      </div>
+    </div>
+    <h2 class="searching-title" id="searchingTitle">Searching campus for a genius...</h2>
+    <p class="searching-sub" id="searchingSub">Someone nearby probably knows this. Finding them now.</p>
+    <div class="searching-steps" id="searchingSteps">
+      <div class="ss-item" id="ss1"><span class="ss-dot"></span> SOS launched to campus 🚀</div>
+      <div class="ss-item" id="ss2"><span class="ss-dot"></span> Scanning 847 skill profiles...</div>
+      <div class="ss-item" id="ss3"><span class="ss-dot"></span> Sorting by who's closest & not asleep...</div>
+      <div class="ss-item" id="ss4"><span class="ss-dot"></span> Buzzing their phones now ⚡</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ RESULTS VIEW ═══ -->
+<div class="results-view" id="resultsView">
+  <div class="container">
+    <div class="results-header">
+      <div class="results-badge">🎯 geniuses inbound</div>
+      <h2 class="results-title">SOS received. Cavalry is coming.<br/>Pick your hero.</h2>
+      <p class="results-sub" id="resultsSub"></p>
+    </div>
+    <div class="matches-grid" id="matchesGrid"></div>
+    <div class="results-footer">
+      <a href="discover.html" class="btn-ghost-lg">Browse more geniuses →</a>
+      <button class="btn-ghost-lg" onclick="resetForm()">I have another problem (obviously)</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/post.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+/* ── Bridgr Design Tokens — Doodle / Brutalist-Lite Mode ── */
+:root {
+  /* Backgrounds */
+  --bg: #fbf9f6;
+  --surface: #ffffff;
+  --surface-2: #ffffff;
+  --surface-3: #f0eae1;
+  --border: #111111;
+  --border-hover: #000000;
+
+  /* Primary accent */
+  --orange: #ff5e3a;
+  --yellow: #ffc800;
+  --blue: #3b82f6;
+  --charcoal: #111111;
+  --sage: #a3a3a3;
+
+  /* Semantic */
+  --green: #16a34a;
+  --red: #dc2626;
+  --pink: #db2777;
+  --cyan: #0891b2;
+  --purple: #7c3aed;
+
+  /* Text */
+  --text-primary: #111111;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+
+  /* Solid Gradients (Brutalist) */
+  --grad-main: #111111;
+  --grad-warm: #ff5e3a;
+  --grad-green: #16a34a;
+  --grad-gold: #ffc800;
+
+  /* Brutalist Shadows */
+  --shadow-brutal: 4px 4px 0px var(--charcoal);
+  --shadow-brutal-hover: 6px 6px 0px var(--charcoal);
+  --shadow-brutal-sm: 2px 2px 0px var(--charcoal);
+  --glow-card: var(--shadow-brutal);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* Radius */
+  --r-sm: 0px;
+  --r-md: 0px;
+  --r-lg: 0px;
+  --r-xl: 0px;
+  --r-full: 0px;
+
+  /* Spacing */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+
+  /* Fonts */
+  --font-display: 'Prata', serif;
+  --font-body: 'Satoshi', 'Inter', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: auto;
+}
+
+.nav-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  border: 2px solid var(--charcoal);
+  box-shadow: var(--shadow-brutal-sm);
+  transition: transform .2s, box-shadow .2s;
+  cursor: pointer;
+}
+
+.nav-avatar:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal);
+}

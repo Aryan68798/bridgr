@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Campus Map — Bridgr</title>
+<meta name="description" content="See who knows what and where across campus. Live skill radar."/>
+
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/tokens.css"/>
+<link rel="stylesheet" href="css/map.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+    <ul class="nav-links">
+
+      <li><a href="discover.html">Discover</a></li>
+      <li><a href="map.html" class="nav-active">Campus Map</a></li>
+      <li><a href="rooms.html">Rooms</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-avatar" title="Login">AR</a>
+      <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HUD TOP BAR -->
+<div class="hud-top">
+  <div class="hud-stat"><span class="hud-num" id="hudOnline">24</span><span class="hud-lbl">online now</span></div>
+  <div class="hud-divider"></div>
+  <div class="hud-stat"><span class="hud-num" id="hudSessions">3</span><span class="hud-lbl">active sessions</span></div>
+  <div class="hud-divider"></div>
+  <div class="hud-stat"><span class="hud-num" id="hudSkills">12</span><span class="hud-lbl">skills available</span></div>
+  <div class="hud-divider"></div>
+  <div class="hud-live"><span class="live-dot"></span>LIVE</div>
+</div>
+
+<!-- SKILL FILTER PILLS -->
+<div class="skill-filter" id="skillFilter">
+  <button class="sf-pill active" data-skill="all">All Skills</button>
+  <button class="sf-pill" data-skill="react" style="--pc:#9b6dff">⚛️ React</button>
+  <button class="sf-pill" data-skill="python" style="--pc:#34d399">🐍 Python</button>
+  <button class="sf-pill" data-skill="dsa" style="--pc:#f472b6">🧩 DSA</button>
+  <button class="sf-pill" data-skill="ml" style="--pc:#22d3ee">🤖 ML</button>
+  <button class="sf-pill" data-skill="design" style="--pc:#fb923c">🎨 Design</button>
+  <button class="sf-pill" data-skill="git" style="--pc:#4a9eff">🌿 Git</button>
+  <button class="sf-pill" data-skill="systems" style="--pc:#fbbf24">⚙️ Systems</button>
+</div>
+
+<!-- MAP CANVAS AREA -->
+<div class="map-container" id="mapContainer">
+  <canvas id="mapCanvas"></canvas>
+
+  <!-- Building Labels (absolutely positioned) -->
+  <div class="bld-label" style="left:18%;top:22%" id="bld-cs">CS Building</div>
+  <div class="bld-label" style="left:55%;top:15%" id="bld-ece">ECE Block</div>
+  <div class="bld-label" style="left:75%;top:40%" id="bld-lib">Library</div>
+  <div class="bld-label" style="left:15%;top:62%" id="bld-hostel">Hostel B</div>
+  <div class="bld-label" style="left:48%;top:58%" id="bld-lab">Lab Wing</div>
+  <div class="bld-label" style="left:72%;top:72%" id="bld-media">Media Lab</div>
+  <div class="bld-label" style="left:30%;top:42%" id="bld-canteen">Canteen Area</div>
+
+  <!-- Student Dots (injected by JS) -->
+  <div id="dotsLayer"></div>
+</div>
+
+<!-- PROFILE CARD (hidden by default) -->
+<div class="profile-card" id="profileCard">
+  <button class="pc-close" id="pcClose">✕</button>
+  <div class="pc-top">
+    <div class="pc-avatar" id="pcAvatar"></div>
+    <div class="pc-meta">
+      <div class="pc-name" id="pcName"></div>
+      <div class="pc-dept" id="pcDept"></div>
+      <div class="pc-loc" id="pcLoc"></div>
+    </div>
+  </div>
+  <div class="pc-title" id="pcTitle"></div>
+  <div class="pc-section-lbl">⚡ SUPERPOWERS</div>
+  <div class="pc-skills" id="pcSkills"></div>
+  <div class="pc-section-lbl" style="margin-top:10px">📅 AVAILABILITY</div>
+  <div class="pc-avail" id="pcAvail"></div>
+  <div class="pc-sessions" id="pcSessions"></div>
+  <button class="pc-btn" id="pcBtn">Send a ping ⚡</button>
+  <p class="pc-hint">Usually replies in &lt;3 min</p>
+</div>
+
+<!-- LEGEND -->
+<div class="map-legend">
+  <div class="lg-title">Skill clusters</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#9b6dff;box-shadow:0 0 6px #9b6dff"></span>React / JS</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#34d399;box-shadow:0 0 6px #34d399"></span>Python / ML</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#f472b6;box-shadow:0 0 6px #f472b6"></span>DSA / C++</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#fb923c;box-shadow:0 0 6px #fb923c"></span>Design / UI</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#4a9eff;box-shadow:0 0 6px #4a9eff"></span>Git / DevOps</div>
+  <div class="lg-item"><span class="lg-dot" style="background:#fbbf24;box-shadow:0 0 6px #fbbf24"></span>Systems / ECE</div>
+  <div class="lg-sep"></div>
+  <div class="lg-item"><span class="lg-ring"></span>Active session</div>
+</div>
+
+<!-- ACTIVE SESSION TICKER -->
+<div class="session-ticker" id="sessionTicker">
+  <div class="tk-label">⚡ LIVE</div>
+  <div class="tk-text" id="tkText">Aryan → Tanya: React hooks fix · Block A</div>
+</div>
+
+<script src="js/map.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

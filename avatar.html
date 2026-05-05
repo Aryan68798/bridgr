@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Upload Avatar — Bridgr</title>
+
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/tokens.css"/>
+<link rel="stylesheet" href="css/avatar.css"/>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+    <ul class="nav-links">
+
+      <li><a href="discover.html">Discover</a></li>
+      <li><a href="map.html">Campus Map</a></li>
+      <li><a href="rooms.html">Rooms</a></li>
+      <li><a href="events.html">Events</a></li>
+      <li><a href="leaderboard.html">Leaderboard</a></li>
+    </ul>
+    <div class="nav-actions">
+      <a href="login.html" class="nav-avatar" title="Login">AR</a>
+      <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN APP -->
+<main class="avatar-main">
+  
+  <div class="upload-card reveal">
+    <div class="uc-header">
+      <h1 class="uc-title">Upload your mugshot</h1>
+      <p class="uc-sub">Make yourself recognizable so we don't accidentally ignore you in the CS building.</p>
+    </div>
+
+    <div class="uc-body">
+      
+      <!-- PREVIEW AREA -->
+      <div class="preview-area">
+        <div class="avatar-preview-wrap">
+          <div class="avatar-preview" id="avatarPreview">AR</div>
+          <div class="avatar-ring" id="avatarRing"></div>
+        </div>
+      </div>
+
+      <!-- DROPZONE -->
+      <div class="dropzone" id="dropzone">
+        <input type="file" id="fileInput" accept="image/*" class="file-input" hidden/>
+        <div class="dz-icon">📷</div>
+        <div class="dz-title">Drag & drop your photo here</div>
+        <div class="dz-sub">or <button type="button" class="dz-browse" id="browseBtn">browse your files</button></div>
+        <div class="dz-meta">JPG, PNG, WebP up to 5MB</div>
+      </div>
+
+      <!-- THEME SELECTOR -->
+      <div class="theme-picker">
+        <div class="tp-label">Pick your aura</div>
+        <div class="tp-swatches" id="swatches">
+          <button type="button" class="swatch active" data-grad="linear-gradient(135deg, #fb923c, #9b6dff)" style="background: linear-gradient(135deg, #fb923c, #9b6dff);"></button>
+          <button type="button" class="swatch" data-grad="linear-gradient(135deg, #ffe17c, #fb923c)" style="background: linear-gradient(135deg, #ffe17c, #fb923c);"></button>
+          <button type="button" class="swatch" data-grad="linear-gradient(135deg, #34d399, #22d3ee)" style="background: linear-gradient(135deg, #34d399, #22d3ee);"></button>
+          <button type="button" class="swatch" data-grad="linear-gradient(135deg, #f472b6, #fb923c)" style="background: linear-gradient(135deg, #f472b6, #fb923c);"></button>
+          <button type="button" class="swatch" data-grad="linear-gradient(135deg, #0891b2, #7c3aed)" style="background: linear-gradient(135deg, #0891b2, #7c3aed);"></button>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="uc-footer">
+      <a href="profile.html" class="btn-ghost">Nevermind</a>
+      <button class="btn-primary btn-save" id="saveBtn">Save Profile Picture</button>
+    </div>
+  </div>
+
+</main>
+
+<script src="js/avatar.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

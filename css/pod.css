@@ -1,0 +1,353 @@
+/*
+ * ─────────────────────────────────────────────────────────────────
+ * POD.CSS — Principles of Design System
+ * Shared design tokens and repeated visual elements used across
+ * ALL pages to demonstrate the 8 design principles.
+ * ─────────────────────────────────────────────────────────────────
+ *
+ * PRINCIPLE MAP:
+ *   Contrast    → Large serifs vs small mono, black vs white vs accents
+ *   Hierarchy   → .pod-headline > .pod-subhead > .pod-body scale
+ *   Balance     → .pod-split (asymmetric 2-col grid)
+ *   Alignment   → Consistent max-width container (1280px)
+ *   Proximity   → .pod-group (grouped element blocks)
+ *   Repetition  → .pod-star, .pod-blob, .pod-float-note repeated on every page
+ *   Rhythm      → Staggered card offsets, animation delays
+ *   Whitespace  → Generous padding tokens --space-xl / --space-2xl
+ * ─────────────────────────────────────────────────────────────────
+ */
+
+/* ── WHITESPACE TOKENS ── */
+:root {
+  --space-sm:  24px;
+  --space-md:  48px;
+  --space-lg:  80px;
+  --space-xl:  120px;
+  --space-2xl: 180px;
+  --page-max:  1280px;
+}
+
+/* ── PAGE WRAPPER ── */
+.pod-page {
+  background: var(--bg);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ══════════════════════════════════════════════
+   HIERARCHY — Typography scale
+   Large serifs dominate, body is small & light.
+══════════════════════════════════════════════ */
+.pod-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pod-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--orange);
+  flex-shrink: 0;
+}
+
+.pod-headline {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 7vw, 7rem);
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  color: var(--charcoal);
+  text-transform: uppercase;
+  margin-bottom: var(--space-sm);
+}
+
+.pod-headline .accent {
+  color: var(--orange);
+}
+
+.pod-headline .accent-blue {
+  color: var(--blue);
+}
+
+.pod-subhead {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 480px;
+  font-weight: 400;
+}
+
+/* ══════════════════════════════════════════════
+   BALANCE — Asymmetric split layout
+   Left: large type  |  Right: shape / cards
+══════════════════════════════════════════════ */
+.pod-split {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: var(--space-md);
+  align-items: center;
+  min-height: 80vh;
+}
+
+.pod-split.top-align {
+  align-items: start;
+  min-height: auto;
+  padding-top: var(--space-xl);
+  padding-bottom: var(--space-lg);
+}
+
+.pod-split-left {
+  position: relative;
+  z-index: 2;
+}
+
+.pod-split-right {
+  position: relative;
+  z-index: 1;
+  min-height: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ══════════════════════════════════════════════
+   REPETITION — Shared graphic elements
+   These repeat identically on every page.
+══════════════════════════════════════════════ */
+
+/* Star accent — repeats on every page */
+.pod-star {
+  pointer-events: none;
+  position: absolute;
+  animation: pod-spin 20s linear infinite;
+}
+
+.pod-star svg {
+  display: block;
+}
+
+@keyframes pod-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* Geometric blob — orange or blue solid shape */
+.pod-blob {
+  position: absolute;
+  pointer-events: none;
+  animation: pod-float 8s ease-in-out infinite;
+  z-index: 0;
+}
+
+.pod-blob-orange {
+  background: var(--orange);
+  clip-path: polygon(10% 0, 15% 5%, 25% 0, 30% 6%, 40% 0, 45% 4%, 55% 0, 60% 5%, 70% 0, 75% 6%, 85% 0, 90% 4%, 100% 0, 95% 10%, 100% 20%, 94% 30%, 100% 40%, 96% 50%, 100% 60%, 95% 70%, 100% 80%, 94% 90%, 100% 100%, 90% 95%, 80% 100%, 70% 94%, 60% 100%, 50% 95%, 40% 100%, 30% 96%, 20% 100%, 10% 95%, 0 100%, 5% 90%, 0 80%, 6% 70%, 0 60%, 4% 50%, 0 40%, 5% 30%, 0 20%, 6% 10%, 0 0);
+}
+
+.pod-blob-blue {
+  background: var(--blue);
+  clip-path: polygon(0 5%, 10% 0, 20% 4%, 30% 0, 40% 5%, 50% 0, 60% 6%, 70% 0, 80% 5%, 90% 0, 100% 5%, 95% 15%, 100% 25%, 94% 35%, 100% 45%, 96% 55%, 100% 65%, 95% 75%, 100% 85%, 94% 95%, 100% 100%, 90% 95%, 80% 100%, 70% 94%, 60% 100%, 50% 95%, 40% 100%, 30% 96%, 20% 100%, 10% 95%, 0 100%, 5% 90%, 0 80%, 6% 70%, 0 60%, 4% 50%, 0 40%, 5% 30%, 0 20%, 6% 10%, 0 0);
+}
+
+.pod-blob-yellow {
+  background: var(--yellow);
+  clip-path: polygon(50% 0%, 61% 16%, 80% 10%, 82% 30%, 100% 41%, 89% 57%, 93% 76%, 74% 82%, 63% 100%, 46% 89%, 28% 97%, 23% 78%, 4% 80%, 13% 62%, 0% 45%, 17% 31%, 10% 13%, 29% 15%, 39% 0%);
+}
+
+@keyframes pod-float {
+  0%,100% { transform: translateY(0) scale(1); }
+  50%      { transform: translateY(-24px) scale(1.03); }
+}
+
+/* Floating note card — repeats on every page */
+.pod-note {
+  background: #fff;
+  border: 1.5px solid var(--charcoal);
+  padding: 14px 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  max-width: 260px;
+  position: absolute;
+  box-shadow: 4px 4px 0px var(--charcoal);
+  animation: pod-note-float 4s ease-in-out infinite;
+  z-index: 3;
+  line-height: 1.4;
+}
+
+.pod-note small {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 400;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+.pod-note.accent-orange { border-left: 4px solid var(--orange); }
+.pod-note.accent-blue   { border-left: 4px solid var(--blue); }
+.pod-note.accent-yellow { border-left: 4px solid var(--yellow); }
+
+@keyframes pod-note-float {
+  0%,100% { transform: translateY(0) rotate(var(--note-rot, 0deg)); }
+  50%      { transform: translateY(-10px) rotate(var(--note-rot, 0deg)); }
+}
+
+/* ══════════════════════════════════════════════
+   CONTRAST — Strong dividers and accents
+══════════════════════════════════════════════ */
+.pod-divider {
+  width: 100%;
+  height: 2px;
+  background: var(--charcoal);
+  margin: var(--space-md) 0;
+}
+
+.pod-accent-line {
+  display: inline-block;
+  width: 60px;
+  height: 4px;
+  background: var(--orange);
+  margin-bottom: 24px;
+}
+
+/* ══════════════════════════════════════════════
+   RHYTHM — Section wrapper with consistent flow
+══════════════════════════════════════════════ */
+.pod-section {
+  position: relative;
+  padding: var(--space-lg) 0;
+  overflow: hidden;
+}
+
+.pod-container {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+}
+
+/* ══════════════════════════════════════════════
+   PROXIMITY — Card group system
+   Related elements grouped with consistent gap.
+══════════════════════════════════════════════ */
+.pod-card-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.pod-card-grid.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.pod-card-grid.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Stagger even cards down for RHYTHM */
+.pod-card-grid > *:nth-child(even) {
+  transform: translateY(32px);
+}
+
+.pod-card {
+  background: #fff;
+  border: 1.5px solid var(--charcoal);
+  padding: 28px;
+  position: relative;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s;
+}
+
+.pod-card:hover {
+  transform: translate(-4px, -4px) !important;
+  box-shadow: 6px 6px 0px var(--charcoal);
+}
+
+.pod-card-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--orange);
+  margin-bottom: 12px;
+}
+
+.pod-card-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+  line-height: 1.2;
+}
+
+.pod-card-body {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════════════════════
+   ALIGNMENT — Consistent section intro block
+══════════════════════════════════════════════ */
+.pod-section-intro {
+  max-width: var(--page-max);
+  margin: 0 auto;
+  padding: 0 var(--space-sm);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 48px;
+}
+
+.pod-section-intro-right {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: right;
+  max-width: 240px;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════ */
+@media (max-width: 900px) {
+  .pod-split {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    padding-top: 120px;
+    padding-bottom: 48px;
+  }
+
+  .pod-split-right {
+    min-height: 300px;
+  }
+
+  .pod-card-grid.cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .pod-card-grid.cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .pod-card-grid > *:nth-child(even) {
+    transform: none;
+  }
+
+  .pod-section-intro {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+  }
+}

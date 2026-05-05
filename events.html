@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Events & Sessions — Bridgr</title>
+  <meta name="description" content="Host a study session or event on campus. Find your tribe." />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/events.css" />
+</head>
+
+<body>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html" class="nav-active">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO — Principles: Hierarchy, Balance, Repetition, Contrast -->
+  <section class="events-hero" style="position: relative; overflow: hidden; padding-top: var(--space-2xl); padding-bottom: var(--space-lg);">
+    <!-- REPETITION: Same orange/blue blobs as all other pages -->
+    <div class="pod-blob pod-blob-orange" style="width:400px; height:560px; top:0; right:-30px; animation-delay:-2s;"></div>
+    <div class="pod-blob pod-blob-blue" style="width:240px; height:320px; bottom:-50px; left:12%; animation-delay:-5s;"></div>
+    <!-- REPETITION: Rotating star -->
+    <div class="pod-star" style="top:15%; left:3%; width:56px; height:56px; animation-duration:18s;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="56" height="56"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/></svg>
+    </div>
+
+    <!-- BALANCE: Left text, right visual -->
+    <div class="pod-split" style="min-height: auto; padding-top:0; padding-bottom:0; align-items: center;">
+      <div class="pod-split-left">
+        <div class="pod-eyebrow" style="font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; color: var(--charcoal); background: var(--yellow); display: inline-flex; padding: 4px 12px; gap: 8px;">📅 HAPPENS IRL</div>
+        <h1 class="pod-headline">
+          Host a<br/>
+          <span class="accent">Session.</span><br/>
+          Build your<br/>
+          <span style="color: var(--orange);">Tribe.</span>
+        </h1>
+        <p class="pod-subhead" style="font-weight: 700;">
+          Stop struggling alone. Host a study session, run a workshop, or just find people to code with in the library.
+        </p>
+      </div>
+      <div class="pod-split-right" style="min-height: 360px;">
+        <!-- REPETITION: Floating note cards -->
+        <div class="pod-note accent-orange" style="--note-rot:-2deg; top:8%; left:5%; animation-delay:0s;">
+          📚 Late Night DSA Grind
+          <small>📍 Library, 2nd Floor · Tonight 10 PM</small>
+        </div>
+        <div class="pod-note accent-blue" style="--note-rot:1.5deg; top:40%; left:15%; animation-delay:-2s;">
+          🛠 React Workshop
+          <small>📍 Lab Wing · Saturday 3 PM</small>
+        </div>
+        <div class="pod-note" style="--note-rot:-1deg; top:70%; left:2%; animation-delay:-4s; background: var(--yellow); border-color: var(--charcoal);">
+          ⚡ 12 people joining today
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <main class="events-main">
+
+    <!-- LEFT: HOST FORM -->
+    <aside class="host-section">
+      <form class="host-card" id="hostEventForm">
+        <h2 class="host-title">Host an Event</h2>
+        <p class="host-sub">Takes 30 seconds. We'll broadcast it to campus.</p>
+
+        <div class="field-group">
+          <label class="field-label" for="evTitle">What's happening? <span class="req">*</span></label>
+          <input type="text" id="evTitle" class="field-input" placeholder="e.g. Late Night DSA Grind" required />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label">Type of Event</label>
+          <div class="type-chips">
+            <div class="type-chip active">Study Session</div>
+            <div class="type-chip">Workshop</div>
+            <div class="type-chip">Project Collab</div>
+            <div class="type-chip">Casual Chill</div>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="evDate">When? <span class="req">*</span></label>
+          <input type="text" id="evDate" class="field-input" placeholder="e.g. Tonight at 10 PM" required />
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="evLocation">Where? <span class="req">*</span></label>
+          <select id="evLocation" class="field-input" required>
+            <option value="" disabled selected>Pick a location on campus...</option>
+            <option value="Library, 1st Floor">Library, 1st Floor</option>
+            <option value="Library, 2nd Floor">Library, 2nd Floor</option>
+            <option value="Block A, Study Room">Block A, Study Room</option>
+            <option value="Block B, Empty Classroom">Block B, Empty Classroom</option>
+            <option value="Hostel B, Common Room">Hostel B, Common Room</option>
+            <option value="Lab Wing, Maker Space">Lab Wing, Maker Space</option>
+            <option value="Campus Cafe">Campus Cafe</option>
+            <option value="Online (Discord/Zoom)">Online (Discord/Zoom)</option>
+            <option value="Other (specify in details)">Other (specify in details)</option>
+          </select>
+        </div>
+
+        <div class="field-group" style="display:flex; gap:16px; flex-direction:row;">
+          <div style="flex:1;">
+            <label class="field-label" for="evCapacity">Max Capacity</label>
+            <input type="number" id="evCapacity" class="field-input" placeholder="e.g. 10" min="2" max="100" />
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label class="field-label" for="evDesc">Details (optional)</label>
+          <textarea id="evDesc" class="field-input" rows="3"
+            placeholder="Bring your own snacks. We are covering dynamic programming."></textarea>
+        </div>
+
+        <button type="submit" class="btn-host">Host Event 🚀</button>
+      </form>
+    </aside>
+
+    <!-- RIGHT: UPCOMING EVENTS -->
+    <section class="events-list-wrap">
+      <h2 class="grid-title">Happening on Campus</h2>
+      <div class="events-grid" id="eventsGrid">
+        <!-- Injected via JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SUCCESS MODAL -->
+  <div class="success-modal" id="successModal">
+    <div class="sm-content">
+      <div class="sm-icon">🎉</div>
+      <h2 class="sm-title">Event Hosted!</h2>
+      <p class="sm-sub">Your session is now live on campus. Check the grid to see it.</p>
+      <button class="btn-primary sm-btn" id="closeSm">Awesome</button>
+    </div>
+  </div>
+
+  <script src="js/events.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

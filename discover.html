@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Find Your People — Bridgr</title>
+  <meta name="description" content="Someone on your campus already knows the answer. Find them before you lose your mind." />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/discover.css" />
+</head>
+
+<body class="pod-page">
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html" class="nav-active">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+       PRINCIPLES: Contrast, Hierarchy, Balance, Repetition
+  ═══════════════════════════════════════════════ -->
+  <section class="disc-hero" style="position:relative; overflow:hidden; padding-top: var(--space-2xl); padding-bottom: var(--space-lg);">
+
+    <!-- REPETITION: Orange blob (same as landing page) -->
+    <div class="pod-blob pod-blob-orange" style="width:420px; height:580px; top:0; right:-40px; z-index:0; animation-delay:-2s;"></div>
+    <!-- REPETITION: Blue blob (same as landing page) -->
+    <div class="pod-blob pod-blob-blue" style="width:260px; height:340px; bottom:-60px; left:10%; animation-delay:-5s;"></div>
+    <!-- REPETITION: Yellow star accent -->
+    <div class="pod-star" style="top:14%; left:3%; width:52px; height:52px;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="52" height="52">
+        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/>
+      </svg>
+    </div>
+
+    <!-- BALANCE: Asymmetric split — type-heavy left, visual right -->
+    <div class="pod-split" style="min-height: auto; align-items: center; padding-top: 0; padding-bottom: 0;">
+
+      <!-- LEFT: Hierarchy — dominant headline, smaller subtext -->
+      <div class="pod-split-left">
+        <!-- CONTRAST: Mono eyebrow vs giant serif headline -->
+        <div class="pod-eyebrow">📡 scanning campus now</div>
+
+        <!-- HIERARCHY: Largest element on the page -->
+        <h1 class="pod-headline" style="margin-bottom: 24px;">
+          Find your<br/>
+          campus<br/>
+          <span class="accent">genius.</span>
+        </h1>
+
+        <!-- HIERARCHY: Smaller, lighter body text -->
+        <p class="pod-subhead" style="margin-bottom: 40px;">
+          Someone nearby probably solved this already. Find them before you waste another 3 hours googling.
+        </p>
+
+        <!-- PROXIMITY: Search grouped tightly with chips below it -->
+        <div class="search-wrap">
+          <div class="search-box">
+            <span class="search-icon">🔎</span>
+            <input type="text" id="searchInput" class="search-input" placeholder="Search a skill, a name, a vibe..." />
+            <button class="search-clear" id="clearBtn" aria-label="clear">✕</button>
+          </div>
+          <div class="quick-chips" id="quickChips">
+            <button class="chip active" data-skill="all">All</button>
+            <button class="chip" data-skill="React">React</button>
+            <button class="chip" data-skill="Python">Python</button>
+            <button class="chip" data-skill="DSA">DSA</button>
+            <button class="chip" data-skill="ML">ML</button>
+            <button class="chip" data-skill="UI Design">UI Design</button>
+            <button class="chip" data-skill="Git">Git</button>
+            <button class="chip" data-skill="Docker">Docker</button>
+            <button class="chip" data-skill="C++">C++</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Floating note cards (REPETITION from landing page) -->
+      <div class="pod-split-right" style="min-height: 440px;">
+        <!-- REPETITION: Same float-note style as landing page hero -->
+        <div class="pod-note accent-orange" style="--note-rot:-2deg; top:10%; left:5%; animation-delay:0s;">
+          🐛 "async/await is lying to me"
+          <small>📍 Block C, 3rd floor</small>
+        </div>
+        <div class="pod-note accent-blue" style="--note-rot:1.5deg; top:35%; left:20%; animation-delay:-1.2s;">
+          🤯 "3 hours on one pointer bug"
+          <small>📍 Library, 2nd Floor</small>
+        </div>
+        <div class="pod-note" style="--note-rot:-1deg; top:58%; left:2%; animation-delay:-2.4s; background:var(--yellow); border-color:var(--charcoal);">
+          ⚡ Solved in 9 min
+        </div>
+        <div class="pod-note accent-blue" style="--note-rot:2deg; top:78%; left:22%; animation-delay:-3.5s;">
+          🎯 5 people nearby know React
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- WHITESPACE: Visual breathing room before filter bar -->
+
+  <!-- FILTER BAR: ALIGNMENT — all filters on same baseline -->
+  <div class="filter-bar" id="filterBar">
+    <div class="filter-inner">
+      <div class="filter-group">
+        <label class="filter-label">📍 Where are they?</label>
+        <select class="filter-select" id="buildingFilter">
+          <option value="all">Anywhere</option>
+          <option value="Block A">Block A</option>
+          <option value="Block B">Block B</option>
+          <option value="Block C">Block C</option>
+          <option value="Block D">Block D</option>
+          <option value="Library">Library</option>
+          <option value="Hostel B">Hostel B</option>
+          <option value="Lab Wing">Lab Wing</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">🎓 Their tribe</label>
+        <select class="filter-select" id="deptFilter">
+          <option value="all">All Depts</option>
+          <option value="CS">CS</option>
+          <option value="ECE">ECE</option>
+          <option value="IT">IT</option>
+          <option value="Maths">Maths</option>
+          <option value="Design">Design</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">📅 How senior?</label>
+        <select class="filter-select" id="yearFilter">
+          <option value="all">All Years</option>
+          <option value="1">1st Year</option>
+          <option value="2">2nd Year</option>
+          <option value="3">3rd Year</option>
+          <option value="4">4th Year</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label class="filter-label">⚡ Vibe check</label>
+        <select class="filter-select" id="statusFilter">
+          <option value="all">Dead or alive</option>
+          <option value="available">Free right now 🟢</option>
+          <option value="busy">Interrupt them anyway</option>
+        </select>
+      </div>
+      <div class="filter-meta" id="filterMeta"><strong id="countLabel">18</strong> geniuses found</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       STUDENT GRID
+       PRINCIPLES: Rhythm, Proximity, Repetition
+  ═══════════════════════════════════════════════ -->
+  <main class="disc-main">
+    <div class="pod-container">
+      <!-- ALIGNMENT: section intro aligned consistently -->
+      <div class="pod-section-intro" style="margin-bottom: 40px;">
+        <div>
+          <div class="pod-eyebrow">👥 your campus network</div>
+          <div style="font-family: var(--font-display); font-size: 2rem; line-height:1.1;">People who can help</div>
+        </div>
+        <div class="pod-section-intro-right">
+          All verified by campus proximity.<br/>Sorted by karma & availability.
+        </div>
+      </div>
+
+      <!-- RHYTHM: Student cards with stagger on even children -->
+      <div class="student-grid" id="studentGrid"></div>
+      <div class="empty-state" id="emptyState" style="display:none">
+        <div class="empty-icon">🫠</div>
+        <h3>Nobody? Really?</h3>
+        <p>Either that skill doesn't exist here, or they're hiding. Try something else — or just ask a random CS student, works 40% of the time.</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- MESSAGE MODAL -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal" id="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-avatar" id="modalAvatar"></div>
+      <div class="modal-name" id="modalName"></div>
+      <div class="modal-role" id="modalRole"></div>
+      <textarea class="modal-msg" id="modalMsg" placeholder="Hey! I'm completely lost on something you probably solved in 10 minutes." rows="4"></textarea>
+      <button class="btn-primary modal-send" id="modalSend">Fire the ping ⚡</button>
+      <p class="modal-hint">They'll get buzzed on campus. Replying is optional but their karma points depend on it 👀</p>
+    </div>
+  </div>
+
+  <script src="js/discover.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

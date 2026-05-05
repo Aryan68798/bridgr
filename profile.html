@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Aryan Rai — Bridgr Profile</title>
+  <meta name="description" content="React Wizard. 847 karma points. Helped 142 students at campus." />
+
+  <link rel="stylesheet" href="css/reset.css?v=3" />
+  <link rel="stylesheet" href="css/tokens.css?v=3" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/profile.css?v=3" />
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- REPETITION: Same orange/blue blobs + rotating star as all pages -->
+  <div style="position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;" aria-hidden="true">
+    <div class="pod-blob pod-blob-orange" style="width:340px; height:480px; top:0; right:-20px; animation-delay:-3s;"></div>
+    <div class="pod-blob pod-blob-blue" style="width:200px; height:280px; bottom:-30px; left:8%; animation-delay:-7s;"></div>
+    <div class="pod-star" style="top:18%; left:2%; width:48px; height:48px; animation-duration:22s;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="48" height="48"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/></svg>
+    </div>
+  </div>
+
+  <main class="profile-main">
+
+    <!-- ═══ PROFILE HEADER ═══ -->
+    <header class="prof-header reveal">
+      <div class="ph-banner" id="phBanner">
+        <div class="ph-banner-pattern"></div>
+      </div>
+      <div class="ph-body">
+        <div class="ph-left">
+          <div class="ph-av-wrap">
+            <div class="ph-avatar" id="phAvatar">AR</div>
+            <div class="ph-av-ring"></div>
+            <div class="ph-status online" title="Online now"></div>
+          </div>
+          <div class="ph-info">
+            <div class="ph-rank-badge" id="phRank">🔱 Campus Wizard</div>
+            <h1 class="ph-name" id="phName">Aryan Rai</h1>
+            <p class="ph-sub" id="phSub">CS · 3rd Year · Block A, Room 304</p>
+            <div class="ph-tags">
+              <span class="ph-tag">⚛️ React Wizard</span>
+              <span class="ph-tag">📍 CS Building</span>
+              <span class="ph-tag ph-tag-avail">🟢 Available now</span>
+            </div>
+          </div>
+        </div>
+        <div class="ph-right">
+          <div class="ph-cred-box">
+            <div class="ph-cred-num" id="phCredNum">0</div>
+            <div class="ph-cred-lbl">karma points</div>
+            <div class="ph-cred-tier" id="phCredTier">Top 3% on campus</div>
+          </div>
+        </div>
+      </div>
+      <div class="ph-actions">
+        <button class="btn-ping" id="editProfileBtn">Edit profile ✏️</button>
+        <button class="btn-ghost">View schedule</button>
+        <button class="btn-ghost">Share profile</button>
+        <button class="btn-ghost" id="logoutBtn" style="color: var(--red); border-color: var(--red);">Log out
+          🚪</button>
+      </div>
+    </header>
+
+    <div class="profile-grid">
+
+      <!-- ═══ LEFT COLUMN ═══ -->
+      <div class="col-left">
+
+        <!-- QUICK STATS -->
+        <div class="card reveal" style="--delay:.05s">
+          <div class="card-label">📊 Campus damage this semester</div>
+          <div class="stats-grid">
+            <div class="stat-item">
+              <div class="stat-num counter" data-target="142">0</div>
+              <div class="stat-lbl">bugs/crises survived</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num counter" data-target="91">0</div>
+              <div class="stat-lbl">sessions done (didn't cancel once)</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">4.9<span style="font-size:1rem">★</span></div>
+              <div class="stat-lbl">avg rating (suspiciously good)</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-num">~<span class="counter" data-target="8">0</span>m</div>
+              <div class="stat-lbl">avg to fix your life</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- REPUTATION LADDER -->
+        <div class="card reveal" style="--delay:.1s">
+          <div class="card-label">🏆 The Nerd Ladder</div>
+          <div class="rep-ladder">
+            <div class="rep-rung done">
+              <div class="rung-icon">🐛</div>
+              <div class="rung-info">
+                <div class="rung-title">Bug Survivor</div>
+                <div class="rung-req">First 10 sessions</div>
+              </div>
+              <div class="rung-check">✓</div>
+            </div>
+            <div class="rep-rung done">
+              <div class="rung-icon">🔧</div>
+              <div class="rung-info">
+                <div class="rung-title">Debugger</div>
+                <div class="rung-req">50+ cred</div>
+              </div>
+              <div class="rung-check">✓</div>
+            </div>
+            <div class="rep-rung done">
+              <div class="rung-icon">⚡</div>
+              <div class="rung-info">
+                <div class="rung-title">Problem Slayer</div>
+                <div class="rung-req">200+ cred</div>
+              </div>
+              <div class="rung-check">✓</div>
+            </div>
+            <div class="rep-rung done">
+              <div class="rung-icon">🌟</div>
+              <div class="rung-info">
+                <div class="rung-title">Campus Expert</div>
+                <div class="rung-req">500+ cred</div>
+              </div>
+              <div class="rung-check">✓</div>
+            </div>
+            <div class="rep-rung active">
+              <div class="rung-icon">🔱</div>
+              <div class="rung-info">
+                <div class="rung-title">Campus Wizard</div>
+                <div class="rung-req">800+ cred · Current</div>
+              </div>
+              <div class="rung-check current">👑</div>
+            </div>
+            <div class="rep-rung locked">
+              <div class="rung-icon">🌌</div>
+              <div class="rung-info">
+                <div class="rung-title">Legendary Helper</div>
+                <div class="rung-req">1500 cred · only 653 bugs away</div>
+              </div>
+              <div class="rung-check">🔒</div>
+            </div>
+          </div>
+          <div class="next-tier-bar">
+            <div class="ntb-label"><span>Campus Wizard</span><span>Legendary Helper</span></div>
+            <div class="ntb-track">
+              <div class="ntb-fill" style="width:0%" id="ntbFill"></div>
+            </div>
+            <div class="ntb-meta">847 / 1500 cred · <strong>653 bugs</strong> stand between you and legend</div>
+          </div>
+        </div>
+
+        <!-- AVAILABILITY -->
+        <div class="card reveal" style="--delay:.15s">
+          <div class="card-label">📅 Usually shows up</div>
+          <div class="avail-grid">
+            <div class="avail-row"><span class="avail-day">Mon</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">After 4pm</div>
+                <div class="avail-slot on">Evening</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Tue</span>
+              <div class="avail-slots">
+                <div class="avail-slot off">Busy all day</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Wed</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">After 2pm</div>
+                <div class="avail-slot on">Evening</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Thu</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">Anytime</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Fri</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">After 5pm</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Sat</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">Anytime</div>
+                <div class="avail-slot on">🔥 Most sessions</div>
+              </div>
+            </div>
+            <div class="avail-row"><span class="avail-day">Sun</span>
+              <div class="avail-slots">
+                <div class="avail-slot on">Anytime</div>
+              </div>
+            </div>
+          </div>
+          <p class="avail-note">Online most evenings. Responds in ~3 min when not deep in a rabbit hole.</p>
+        </div>
+
+      </div>
+
+      <!-- ═══ RIGHT COLUMN ═══ -->
+      <div class="col-right">
+
+        <!-- SUPERPOWERS -->
+        <div class="card reveal" style="--delay:.08s">
+          <div class="card-label">⚡ Superpowers</div>
+          <p class="card-sub">Levels based on sessions done + whether people cried tears of joy afterward</p>
+          <div class="powers-list" id="powersList">
+            <!-- injected by JS -->
+          </div>
+        </div>
+
+        <!-- RECENT SESSIONS -->
+        <div class="card reveal" style="--delay:.12s">
+          <div class="card-label">🕐 Recent W's</div>
+          <p class="card-sub">Last 7 days of bug eliminations</p>
+          <div class="sessions-list" id="sessionsList"></div>
+        </div>
+
+        <!-- REVIEWS -->
+        <div class="card reveal" style="--delay:.18s">
+          <div class="card-label">💬 What they're saying</div>
+          <p class="card-sub" id="reviewsLabel">142 people. All alive. Some of them passed their exams.</p>
+          <div class="reviews-list" id="reviewsList"></div>
+          <div class="reviews-summary">
+            <div class="rs-bar-row"><span class="rs-star">5★</span>
+              <div class="rs-track">
+                <div class="rs-fill" style="width:0%" data-w="82%"></div>
+              </div><span class="rs-pct">82%</span>
+            </div>
+            <div class="rs-bar-row"><span class="rs-star">4★</span>
+              <div class="rs-track">
+                <div class="rs-fill" style="width:0%" data-w="12%"></div>
+              </div><span class="rs-pct">12%</span>
+            </div>
+            <div class="rs-bar-row"><span class="rs-star">3★</span>
+              <div class="rs-track">
+                <div class="rs-fill" style="width:0%" data-w="4%"></div>
+              </div><span class="rs-pct">4%</span>
+            </div>
+            <div class="rs-bar-row"><span class="rs-star">2★</span>
+              <div class="rs-track">
+                <div class="rs-fill" style="width:0%" data-w="2%"></div>
+              </div><span class="rs-pct">2%</span>
+            </div>
+            <div class="rs-bar-row"><span class="rs-star">1★</span>
+              <div class="rs-track">
+                <div class="rs-fill" style="width:0%" data-w="0%"></div>
+              </div><span class="rs-pct">0%</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- BADGES SHELF -->
+    <div class="badges-section reveal" style="--delay:.22s">
+      <div class="card">
+        <div class="card-label">🏅 Wall of Achievements</div>
+        <p class="card-sub">Earned through helping, showing up, and not disappearing mid-session. The last one matters.
+        </p>
+        <div class="badges-shelf" id="badgesShelf"></div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- PING MODAL -->
+  <div class="ping-backdrop" id="pingBackdrop">
+    <div class="ping-modal">
+      <button class="pm-close" id="pmClose">✕</button>
+      <div class="pm-av" id="pmAv">AR</div>
+      <div class="pm-name">Aryan Rai</div>
+      <div class="pm-role">⚛️ React Wizard</div>
+      <textarea class="pm-msg" id="pmMsg"
+        placeholder="Hey! Completely lost on a React problem you could probably fix in 2 minutes." rows="4"></textarea>
+      <button class="pm-send" id="pmSend">Fire the ping ⚡</button>
+      <p class="pm-hint">Usually replies in &lt;3 min · 🟢 Online right now</p>
+    </div>
+  </div>
+
+  <!-- EDIT PROFILE MODAL -->
+  <div class="ping-backdrop" id="editBackdrop">
+    <div class="ping-modal">
+      <button class="pm-close" id="emClose">✕</button>
+      <div class="pm-name" style="margin-bottom:20px;text-align:left;">Edit Profile</div>
+
+      <div class="em-field">
+        <label class="em-label">Full Name</label>
+        <input type="text" id="emName" class="pm-msg"
+          style="height:auto;padding:12px;margin-bottom:12px;resize:none;" />
+      </div>
+
+      <div class="em-field">
+        <label class="em-label">Department & Year</label>
+        <input type="text" id="emDept" class="pm-msg"
+          style="height:auto;padding:12px;margin-bottom:12px;resize:none;" />
+      </div>
+
+      <div class="em-field">
+        <label class="em-label">Location</label>
+        <input type="text" id="emLoc" class="pm-msg" style="height:auto;padding:12px;margin-bottom:12px;resize:none;" />
+      </div>
+
+      <div class="em-field">
+        <label class="em-label">Title / Role</label>
+        <input type="text" id="emTitle" class="pm-msg"
+          style="height:auto;padding:12px;margin-bottom:20px;resize:none;" />
+      </div>
+
+      <button class="pm-send" id="emSave">Save Changes ✓</button>
+    </div>
+  </div>
+
+  <script src="js/profile.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,232 @@
+/* ── LOGIN SPECIFIC STYLES ── */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-3);
+  padding: 24px;
+}
+
+.login-card {
+  display: flex;
+  background: var(--surface);
+  border: 2px solid var(--charcoal);
+  box-shadow: var(--shadow-brutal-hover);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  max-width: 900px;
+  width: 100%;
+  min-height: 550px;
+}
+
+.login-left {
+  flex: 1;
+  background: #fdf5ef;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-right: 2px solid var(--charcoal);
+  padding: 40px;
+  position: relative;
+}
+
+.login-left img {
+  max-width: 100%;
+  max-height: 450px;
+  object-fit: contain;
+}
+
+.login-brand {
+  position: absolute;
+  top: 32px;
+  left: 32px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--orange);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-right {
+  flex: 1;
+  padding: 64px 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.login-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--charcoal);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.login-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  color: var(--charcoal);
+  text-align: center;
+  margin-bottom: 40px;
+  font-weight: 700;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.form-input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  font-size: 1.1rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 12px 16px 12px 42px;
+  border: 2px solid var(--charcoal);
+  background: var(--surface-2);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: box-shadow 0.2s, transform 0.2s;
+  border-radius: var(--r-md);
+}
+
+.form-input:focus {
+  outline: none;
+  box-shadow: var(--shadow-brutal-sm);
+  transform: translate(-2px, -2px);
+}
+
+.form-options {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: -8px;
+}
+
+.forgot-link {
+  font-size: 0.85rem;
+  color: var(--orange);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+.login-submit {
+  margin-top: 10px;
+  width: 100%;
+  justify-content: center;
+  background: var(--orange);
+  color: #fff;
+}
+
+.login-submit:hover {
+  background: var(--yellow);
+  color: var(--charcoal);
+}
+
+.login-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 32px 0 24px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.login-divider::before,
+.login-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid var(--border);
+}
+
+.login-divider::before { margin-right: 12px; }
+.login-divider::after { margin-left: 12px; }
+
+.social-login {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 32px;
+}
+
+.social-btn {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid var(--charcoal);
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.social-btn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal-sm);
+  background: var(--yellow);
+}
+
+.signup-text {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.signup-link {
+  color: var(--blue);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 3px;
+}
+
+@media(max-width: 768px) {
+  .login-card {
+    flex-direction: column;
+  }
+  .login-left {
+    display: none;
+  }
+  .login-right {
+    padding: 40px 24px;
+  }
+}

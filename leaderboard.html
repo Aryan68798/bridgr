@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Prata&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Hall of Nerds — Bridgr Leaderboard</title>
+  <meta name="description" content="Bridgr Leaderboard — the campus clout your GPA can't buy." />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body class="pod-page">
+
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html" class="nav-active">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════════
+       HERO SECTION
+       PRINCIPLES: Contrast, Hierarchy, Balance, Repetition
+  ═══════════════════════════════════════════════ -->
+  <section style="position:relative; overflow:hidden; padding-top: var(--space-2xl); padding-bottom: var(--space-lg);">
+
+    <!-- REPETITION: Orange blob right side -->
+    <div class="pod-blob pod-blob-orange" style="width:380px; height:520px; top:0; right:-30px; z-index:0; animation-delay:-1s;"></div>
+    <!-- REPETITION: Blue blob bottom left -->
+    <div class="pod-blob pod-blob-blue" style="width:220px; height:300px; bottom:-40px; left:5%; animation-delay:-6s;"></div>
+    <!-- REPETITION: Rotating star top-left -->
+    <div class="pod-star" style="top:12%; left:2%; width:64px; height:64px; animation-duration: 16s;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="64" height="64">
+        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/>
+      </svg>
+    </div>
+    <!-- REPETITION: Small yellow star -->
+    <div class="pod-star" style="top:60%; right:38%; width:36px; height:36px; animation-duration:28s; animation-direction:reverse;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--yellow)" stroke-width="8" stroke-linecap="round" width="36" height="36">
+        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/>
+      </svg>
+    </div>
+
+    <!-- BALANCE: Asymmetric — giant headline left, #1 callout right -->
+    <div class="pod-split" style="min-height: auto; padding-top: 0; padding-bottom: 0; align-items: center;">
+
+      <!-- LEFT: HIERARCHY — dominant headline -->
+      <div class="pod-split-left">
+        <div class="pod-eyebrow">🏆 campus rankings</div>
+        <h1 class="pod-headline">
+          Hall<br/>
+          of<br/>
+          <span class="accent">Nerds</span>
+        </h1>
+        <p class="pod-subhead" style="margin-bottom: 40px; font-weight: 700; color: var(--charcoal);">
+          Clout, but the kind your GPA can't buy.
+        </p>
+        <!-- CONTRAST: Accent line before stat -->
+        <div class="pod-accent-line"></div>
+        <div style="font-family: var(--font-mono); font-size: 0.9rem; font-weight: 700; color: var(--charcoal); line-height: 2;">
+          Earn points by helping classmates.<br/>
+          Rise through the ranks this semester.
+        </div>
+      </div>
+
+      <!-- RIGHT: #1 podium callout + floating notes (REPETITION) -->
+      <div class="pod-split-right" style="min-height: 500px; position: relative;">
+        <!-- REPETITION: Floating note card style -->
+        <div class="pod-note accent-orange" style="--note-rot:-2deg; top:5%; left:5%; animation-delay:0s; background: var(--yellow); border-color: var(--charcoal); border-left: 4px solid var(--orange);">
+          🥇 #1 this week
+          <small>Sneha K. — 1,247 karma points</small>
+        </div>
+        <div class="pod-note accent-blue" style="--note-rot:1.5deg; top:30%; left:18%; animation-delay:-1.5s;">
+          🔥 On a 14-day solving streak
+          <small>Aryan R. — 847 pts</small>
+        </div>
+        <div class="pod-note" style="--note-rot:-1deg; top:56%; left:3%; animation-delay:-3s;">
+          ⚡ 142 problems crushed this month
+          <small>Campus-wide record</small>
+        </div>
+        <div class="pod-note accent-orange" style="--note-rot:2deg; top:76%; left:20%; animation-delay:-4.5s; font-size: 1.2rem; padding: 10px 16px;">
+          🏅 +12 new helpers joined today
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHITESPACE: intentional breathing room -->
+
+  <!-- ═══════════════════════════════════════════════
+       LEADERBOARD TABLE
+       PRINCIPLES: Alignment, Proximity, Rhythm
+  ═══════════════════════════════════════════════ -->
+  <section class="pod-section" style="background: #fff; border-top: 2px solid var(--charcoal); border-bottom: 2px solid var(--charcoal);">
+    <div class="pod-container">
+
+      <!-- ALIGNMENT: Section intro aligns consistently across all pages -->
+      <div class="pod-section-intro">
+        <div>
+          <div class="pod-eyebrow">👥 top contributors</div>
+          <div style="font-family: var(--font-display); font-size: 2.5rem; line-height:1;">This semester's ranking</div>
+        </div>
+        <div class="pod-section-intro-right">
+          Updated daily.<br/>Rank is based on solved problems & peer reviews.
+        </div>
+      </div>
+
+      <!-- PROXIMITY: All leaderboard rows are tightly grouped -->
+      <!-- RHYTHM: Row alternation creates visual rhythm -->
+      <div class="leaderboard reveal" style="border: 1.5px solid var(--charcoal); border-radius: 0; overflow: hidden;">
+        <div class="lb-header" style="background: var(--charcoal); color: #fff; border-bottom: none; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; padding: 14px 24px;">
+          <span>Rank</span><span>Student</span><span>Solved</span><span>Karma</span>
+        </div>
+
+        <!-- CONTRAST: Gold row pops against white background -->
+        <div class="lb-row" style="background: var(--yellow); border-bottom: 1.5px solid var(--charcoal);">
+          <span class="lb-rank">🥇</span>
+          <span class="lb-user">
+            <div class="lb-av av-2" style="border: 1.5px solid var(--charcoal);">SK</div>
+            Sneha K.
+            <div class="lb-badge" style="background:#fff; border: 1px solid var(--charcoal); color: var(--charcoal);">Algo Whisperer</div>
+          </span>
+          <span class="lb-num">142</span>
+          <span class="lb-cred" style="-webkit-text-fill-color: var(--charcoal);">1,247</span>
+        </div>
+        <div class="lb-row" style="border-bottom: 1.5px solid var(--charcoal);">
+          <span class="lb-rank">🥈</span>
+          <span class="lb-user">
+            <div class="lb-av av-1" style="border: 1.5px solid var(--charcoal);">AR</div>
+            Aryan R.
+            <div class="lb-badge" style="background: rgba(255,94,58,.12); border: 1px solid var(--orange); color: var(--orange);">React God</div>
+          </span>
+          <span class="lb-num">98</span>
+          <span class="lb-cred">847</span>
+        </div>
+        <div class="lb-row" style="border-bottom: 1.5px solid var(--charcoal); background: rgba(59,130,246,.05);">
+          <span class="lb-rank">🥉</span>
+          <span class="lb-user">
+            <div class="lb-av av-3" style="border: 1.5px solid var(--charcoal);">PV</div>
+            Priya V.
+            <div class="lb-badge" style="background: rgba(59,130,246,.12); border: 1px solid var(--blue); color: var(--blue);">ML Witch</div>
+          </span>
+          <span class="lb-num">81</span>
+          <span class="lb-cred">623</span>
+        </div>
+        <div class="lb-row" style="border-bottom: 1.5px solid var(--charcoal);">
+          <span class="lb-rank" style="font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700;">4</span>
+          <span class="lb-user">
+            <div class="lb-av av-4" style="border: 1.5px solid var(--charcoal);">RT</div>
+            Rahul T.
+            <div class="lb-badge">10-min Hero</div>
+          </span>
+          <span class="lb-num">67</span>
+          <span class="lb-cred">512</span>
+        </div>
+        <div class="lb-row">
+          <span class="lb-rank" style="font-family: var(--font-mono); font-size: 1.1rem; font-weight: 700;">5</span>
+          <span class="lb-user">
+            <div class="lb-av av-5" style="border: 1.5px solid var(--charcoal);">KM</div>
+            Kavya M.
+            <div class="lb-badge">Night Owl Dev</div>
+          </span>
+          <span class="lb-num">53</span>
+          <span class="lb-cred">441</span>
+        </div>
+      </div>
+
+      <!-- WHITESPACE: Bottom breathing room -->
+      <div style="margin-top: 48px; display: flex; align-items: center; gap: 24px;">
+        <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);">
+          You could be up here. Or you could keep suffering alone.
+        </div>
+        <a href="post.html" class="btn-primary" style="white-space: nowrap;">Post a problem →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════════
+       HOW TO EARN — 3-column card section
+       PRINCIPLES: Repetition (card style), Rhythm (stagger), Proximity
+  ═══════════════════════════════════════════════ -->
+  <section class="pod-section" style="padding: var(--space-lg) 0;">
+    <div class="pod-container">
+      <div class="pod-section-intro">
+        <div>
+          <div class="pod-eyebrow">📈 how karma works</div>
+          <div style="font-family: var(--font-display); font-size: 2.5rem;">Earn your rank</div>
+        </div>
+      </div>
+
+      <!-- REPETITION + RHYTHM: 3 cards, evens staggered down -->
+      <div class="pod-card-grid cols-3">
+        <div class="pod-card">
+          <div class="pod-card-eyebrow">01 — answer</div>
+          <div class="pod-card-title">Help someone today</div>
+          <div class="pod-card-body">Respond to a problem post. Get there in under 10 minutes and you earn bonus karma.</div>
+          <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 1.2rem; color: var(--orange); font-weight: 700;">+50 pts</div>
+        </div>
+        <div class="pod-card" style="transform: translateY(32px);">
+          <div class="pod-card-eyebrow">02 — review</div>
+          <div class="pod-card-title">Get a 5-star review</div>
+          <div class="pod-card-body">Every time someone rates your help 5 stars, you climb the board.</div>
+          <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 1.2rem; color: var(--orange); font-weight: 700;">+30 pts</div>
+        </div>
+        <div class="pod-card">
+          <div class="pod-card-eyebrow">03 — streak</div>
+          <div class="pod-card-title">Maintain your streak</div>
+          <div class="pod-card-body">Help someone every day. 7-day streaks multiply your karma by 1.5×.</div>
+          <div style="margin-top: 16px; font-family: var(--font-mono); font-size: 1.2rem; color: var(--orange); font-weight: 700;">1.5× boost</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">BRIDGR</div>
+      <p class="footer-sub">Built by students who were tired of being stuck at 2am.</p>
+      <div class="footer-links">
+        <a href="#">GitHub</a><a href="#">Twitter</a><a href="#">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+
+</html>
