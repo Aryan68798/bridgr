@@ -1,7 +1,6 @@
 /* ── Bridgr Room Finder ── */
 
 const ROOMS = [
-  // Floor 1
   {id:1,name:"Seminar Hall A",building:"CS Building",floor:1,cap:20,status:"occupied",session:"DSA mentoring session",nextFree:"6:30 PM",equip:["Whiteboard","Projector","AC","Podium"],slots:[{t:"2PM–4PM",s:"occ",lbl:"DSA Session"},{t:"4PM–6PM",s:"occ",lbl:"Project Review"},{t:"6PM–8PM",s:"free",lbl:"Free"},{t:"8PM–10PM",s:"free",lbl:"Free"}],px:22,py:28,pinColor:"#f87171"},
   {id:2,name:"Discussion Pod 1",building:"CS Building",floor:1,cap:6,status:"available",session:null,nextFree:null,equip:["Whiteboard","Screen"],slots:[{t:"Now–6PM",s:"free",lbl:"Free"},{t:"6PM–7PM",s:"soon",lbl:"Booked"},{t:"7PM–9PM",s:"occ",lbl:"React study"}],px:30,py:20,pinColor:"#34d399"},
   {id:3,name:"Project Room B",building:"CS Building",floor:1,cap:8,status:"soon",session:null,nextFree:"Available until 5:30 PM",equip:["Whiteboard","Screen","AC"],slots:[{t:"Now–5:30PM",s:"free",lbl:"Free"},{t:"5:30PM–8PM",s:"occ",lbl:"ML project"},{t:"8PM–10PM",s:"free",lbl:"Free"}],px:38,py:35,pinColor:"#fbbf24"},
@@ -19,6 +18,19 @@ const ROOMS = [
   {id:15,name:"CS Discussion Bay",building:"CS Building",floor:2,cap:8,status:"soon",session:null,nextFree:"Available until 6:00 PM",equip:["Whiteboard","Screen","Power Outlets"],slots:[{t:"Now–6PM",s:"free",lbl:"Free"},{t:"6PM–8PM",s:"occ",lbl:"Algo study group"},{t:"8PM–10PM",s:"free",lbl:"Free"}],px:25,py:40,pinColor:"#fbbf24"},
   {id:16,name:"Open Collab Hub",building:"Canteen Area",floor:1,cap:20,status:"available",session:null,nextFree:null,equip:["Whiteboard","Outdoor Seating","Power Outlets"],slots:[{t:"Now–9PM",s:"free",lbl:"Open"}],px:34,py:48,pinColor:"#34d399"},
   {id:17,name:"Rooftop Study Deck",building:"CS Building",floor:4,cap:12,status:"available",session:null,nextFree:null,equip:["Outdoor Seating","Whiteboard","Power Outlets"],slots:[{t:"Now–8PM",s:"free",lbl:"Open"},{t:"8PM–9PM",s:"soon",lbl:"Reserved"}],px:18,py:15,pinColor:"#34d399"},
+  {id:18,name:"ML Research Lab",building:"CS Building",floor:3,cap:15,status:"occupied",session:"Neural Networks Collab",nextFree:"10:00 PM",equip:["High-End GPUs","Whiteboard","AC"],slots:[{t:"Now–10PM",s:"occ",lbl:"ML Collab"}],px:28,py:15,pinColor:"#f87171"},
+  {id:19,name:"Ethics Studio",building:"Library",floor:4,cap:6,status:"available",session:null,nextFree:null,equip:["Comfortable Seating","Whiteboard"],slots:[{t:"Now–10PM",s:"free",lbl:"Open"}],px:70,py:40,pinColor:"#34d399"},
+  {id:20,name:"IoT Playground",building:"Lab Wing",floor:1,cap:12,status:"available",session:null,nextFree:null,equip:["Sensors","Microcontrollers","Soldering"],slots:[{t:"Now–8PM",s:"free",lbl:"Open"}],px:52,py:65,pinColor:"#34d399"},
+  {id:21,name:"UX Critique Pod",building:"Media Lab",floor:1,cap:5,status:"soon",session:null,nextFree:"Available until 4:00 PM",equip:["Figma TV","Whiteboard"],slots:[{t:"Now–4PM",s:"free",lbl:"Free"},{t:"4PM–6PM",s:"occ",lbl:"Design Review"}],px:70,py:75,pinColor:"#fbbf24"},
+  {id:22,name:"Blockchain Hub",building:"ECE Block",floor:3,cap:10,status:"occupied",session:"Solidity Workshop",nextFree:"7:30 PM",equip:["Projector","Ethernet Ports"],slots:[{t:"Now–7:30PM",s:"occ",lbl:"Workshop"}],px:60,py:20,pinColor:"#f87171"},
+  {id:23,name:"Game Dev Suite",building:"CS Building",floor:2,cap:8,status:"available",session:null,nextFree:null,equip:["VR Headsets","Consoles","High-end PCs"],slots:[{t:"Now–11PM",s:"free",lbl:"Open"}],px:30,py:32,pinColor:"#34d399"},
+  {id:24,name:"Quiet Corner 4",building:"Library",floor:2,cap:2,status:"available",session:null,nextFree:null,equip:["Power Outlets"],slots:[{t:"Now–10PM",s:"free",lbl:"Open"}],px:72,py:25,pinColor:"#34d399"},
+  {id:25,name:"Robotics Arena",building:"Lab Wing",floor:1,cap:20,status:"occupied",session:"Bot Wars Prep",nextFree:"9:00 PM",equip:["Testing Track","Tools","AC"],slots:[{t:"Now–9PM",s:"occ",lbl:"Bot Prep"}],px:45,py:55,pinColor:"#f87171"},
+  {id:26,name:"Photography Darkroom",building:"Media Lab",floor:1,cap:4,status:"soon",session:null,nextFree:"Available until 6:00 PM",equip:["Developing Tanks","Enlargers"],slots:[{t:"Now–6PM",s:"free",lbl:"Free"},{t:"6PM–9PM",s:"occ",lbl:"Processing"}],px:76,py:65,pinColor:"#fbbf24"},
+  {id:27,name:"Signal Processing Lab",building:"ECE Block",floor:1,cap:12,status:"available",session:null,nextFree:null,equip:["Spectrum Analyzers","AC"],slots:[{t:"Now–8PM",s:"free",lbl:"Open"}],px:58,py:10,pinColor:"#34d399"},
+  {id:28,name:"Competitive Programming Pit",building:"CS Building",floor:1,cap:25,status:"occupied",session:"Mock Contest",nextFree:"8:30 PM",equip:["High Speed LAN","Whiteboard"],slots:[{t:"Now–8:30PM",s:"occ",lbl:"Mock Contest"}],px:24,py:32,pinColor:"#f87171"},
+  {id:29,name:"Bio-Informatics Pod",building:"Lab Wing",floor:2,cap:6,status:"available",session:null,nextFree:null,equip:["Lab Bench","Screen"],slots:[{t:"Now–10PM",s:"free",lbl:"Open"}],px:48,py:50,pinColor:"#34d399"},
+  {id:30,name:"Cybersecurity Bunker",building:"Hostel B",floor:1,cap:8,status:"occupied",session:"CTF Practice",nextFree:"11:00 PM",equip:["Shielded LAN","Whiteboard"],slots:[{t:"Now–11PM",s:"occ",lbl:"CTF Practice"}],px:12,py:65,pinColor:"#f87171"},
 ];
 
 // ── State ──
