@@ -176,16 +176,6 @@ function renderList() {
   const list = document.getElementById('roomList');
   const rooms = getFilteredRooms();
   document.getElementById('listCount').textContent = rooms.length + ' rooms';
-  if (typeof window.renderRoomListReact === "function") {
-    const usedReact = window.renderRoomListReact(
-      list,
-      rooms,
-      selectedRoom?.id ?? null,
-      openRoom
-    );
-    if (usedReact) return;
-  }
-
   list.innerHTML = rooms
     .map((r) => {
       const dotClass = r.status === "available" ? "s-available" : r.status === "occupied" ? "s-occupied" : "s-soon";

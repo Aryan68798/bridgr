@@ -1,14 +1,6 @@
 /* ── Avatar Upload Page ── */
 
-.nav { position:fixed; top:0; left:0; right:0; z-index:100; padding:12px 0; background:rgba(255,255,255,.97); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
-.nav-inner { max-width:1100px; margin:0 auto; padding:0 24px; display:flex; align-items:center; gap:28px; }
-.logo { font-family:var(--font-display); font-size:1.4rem; color:var(--charcoal); letter-spacing:.03em; }
-.logo-dot { color:var(--yellow); }
-.nav-links { display:flex; gap:24px; margin-left:auto; }
-.nav-links a { color:var(--text-secondary); font-size:.88rem; font-weight:500; transition:color .2s; }
-.nav-links a:hover { color:var(--text-primary); }
-.btn-primary { padding:9px 20px; border-radius:var(--r-full); background:var(--yellow); color:var(--charcoal,#171e19); font-weight:600; font-size:.88rem; transition:opacity .2s,transform .2s; white-space:nowrap; }
-.btn-primary:hover { opacity:.9; transform:translateY(-1px); }
+
 
 .avatar-main { position:relative; z-index:1; min-height:100vh; padding:120px 24px 80px; display:flex; align-items:center; justify-content:center; background:linear-gradient(to bottom, var(--surface-2), var(--bg)); }
 
@@ -53,7 +45,6 @@
 .swatch.active { transform:scale(1.15); box-shadow:0 0 0 2px var(--charcoal); }
 
 .uc-footer { padding:20px 32px; border-top:1px solid var(--border); background:var(--surface-2); display:flex; justify-content:flex-end; gap:12px; }
-.btn-ghost { padding:10px 20px; border-radius:var(--r-full); color:var(--text-secondary); font-size:.9rem; font-weight:500; transition:all .2s; }
-.btn-ghost:hover { color:var(--charcoal); background:rgba(23,30,25,.06); }
+
 .btn-save { padding:10px 24px; font-size:.9rem; }
 .btn-save.loading { opacity:.7; cursor:wait; }

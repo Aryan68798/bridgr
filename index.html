@@ -17,10 +17,23 @@
 </head>
 <body>
 
-<!-- NAV -->
-<nav class="nav" id="nav">
-  <div id="reactNav"></div>
-</nav>
+  <!-- NAV -->
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
 
 <!-- HERO -->
 <section class="hero" id="hero">
@@ -46,7 +59,7 @@
         <a href="#cta" class="btn-ghost btn-lg">🧠 I can help</a>
       </div>
     </div>
-    <div class="floating-cards" id="reactFloatingCards"></div>
+
   </div>
 </section>
 
@@ -155,10 +168,6 @@
   </div>
 </footer>
 
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="js/react-components.js"></script>
-<script src="js/index-react.js"></script>
 <script src="js/main.js"></script>
 <script src="js/auth.js"></script>
 </body>

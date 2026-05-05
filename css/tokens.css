@@ -98,3 +98,122 @@
   transform: translate(-2px, -2px);
   box-shadow: var(--shadow-brutal);
 }
+
+/* ── SHARED NAV ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  padding: 24px 0;
+  transition: background .3s;
+  background: transparent;
+}
+
+.nav.scrolled {
+  background: rgba(251, 249, 246, .98);
+  border-bottom: 2px solid var(--charcoal);
+  padding: 16px 0;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  margin-left: auto;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  font-weight: 500;
+  transition: all .2s;
+  position: relative;
+}
+
+.nav-links a:hover, .nav-active {
+  color: var(--charcoal) !important;
+}
+
+.nav-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--orange);
+}
+
+.nav-cta {
+  margin-left: 16px;
+}
+
+/* ── BUTTONS ── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: var(--charcoal);
+  color: #fff !important;
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid var(--charcoal);
+  transition: transform .2s, box-shadow .2s;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-brutal-hover);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid var(--charcoal);
+  color: var(--charcoal) !important;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: transform .2s, box-shadow .2s;
+  border-radius: 0;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-ghost:hover {
+  background: var(--yellow);
+  transform: translate(-4px, -4px);
+  box-shadow: var(--shadow-brutal-hover);
+}
+
+.btn-lg {
+  padding: 16px 32px;
+  font-size: 1.1rem;
+}
