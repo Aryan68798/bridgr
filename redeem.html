@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Rewards Store — Bridgr</title>
+  <meta name="description" content="Redeem your Bridgr karma for real campus rewards." />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    .store-hero {
+      padding: var(--space-2xl) 0 var(--space-lg) 0;
+      text-align: center;
+      position: relative;
+      border-bottom: 2px solid var(--charcoal);
+      background: var(--surface);
+    }
+
+    .store-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 32px;
+      padding: 64px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .reward-card {
+      background: #fff;
+      border: 2px solid var(--charcoal);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-brutal);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .reward-card:hover {
+      transform: translate(-4px, -4px);
+      box-shadow: var(--shadow-brutal-hover);
+    }
+
+    .rc-img {
+      height: 180px;
+      background: var(--surface-3);
+      border-bottom: 2px solid var(--charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 4rem;
+    }
+
+    .rc-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .rc-cost {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      color: var(--orange);
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .rc-title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      margin-bottom: 12px;
+    }
+
+    .rc-desc {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.5;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .rc-btn {
+      width: 100%;
+    }
+
+    .user-balance {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--yellow);
+      border: 2px solid var(--charcoal);
+      padding: 12px 24px;
+      font-family: var(--font-mono);
+      font-weight: 700;
+      font-size: 1.2rem;
+      box-shadow: var(--shadow-brutal-sm);
+      margin-top: 24px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-loader active" id="pageLoader">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="img/loading_animation.gif" alt="Loading..." class="loader-img">
+      <div class="loader-text">Loading.....</div>
+    </div>
+  </div>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="store-hero">
+    <div class="pod-container" style="position: relative; z-index: 2;">
+      <div class="pod-eyebrow" style="margin-bottom: 16px;">🎁 rewards store</div>
+      <h1 class="pod-headline" style="font-size: 4rem; text-align: center;">Cash in your<br/><span class="accent" style="color: var(--orange);">Karma.</span></h1>
+      <p class="pod-subhead" style="margin: 0 auto; text-align: center; max-width: 600px;">
+        You carried the computer science department on your back. Time to get paid in coffee and hoodies.
+      </p>
+      
+      <div class="user-balance">
+        💰 Your Balance: <span id="userPoints">847</span> pts
+      </div>
+    </div>
+    
+    <!-- Background Decor -->
+    <div class="pod-blob pod-blob-orange" style="width:300px; height:300px; top:-50px; left:-50px; animation-delay:-2s; opacity: 0.5;"></div>
+    <div class="pod-blob pod-blob-blue" style="width:200px; height:200px; bottom:-20px; right:5%; animation-delay:-5s; opacity: 0.5;"></div>
+  </section>
+
+  <main>
+    <div class="store-grid">
+      <!-- Item 1 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(255,190,0,0.2);">☕️</div>
+        <div class="rc-body">
+          <div class="rc-cost">150 pts</div>
+          <h3 class="rc-title">Free Campus Coffee</h3>
+          <p class="rc-desc">Redeem a free medium coffee or espresso from the Student Center cafe. Perfect for your next late-night session.</p>
+          <button class="btn-primary rc-btn" onclick="redeem(150)">Redeem Now</button>
+        </div>
+      </div>
+
+      <!-- Item 2 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(59,130,246,0.2);">🎟️</div>
+        <div class="rc-body">
+          <div class="rc-cost">300 pts</div>
+          <h3 class="rc-title">Priority Event Pass</h3>
+          <p class="rc-desc">Skip the line for any major campus event or guest lecture this semester. Walk in like royalty.</p>
+          <button class="btn-primary rc-btn" onclick="redeem(300)">Redeem Now</button>
+        </div>
+      </div>
+
+      <!-- Item 3 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(220,38,38,0.2);">🍕</div>
+        <div class="rc-body">
+          <div class="rc-cost">500 pts</div>
+          <h3 class="rc-title">Pizza Slice Combo</h3>
+          <p class="rc-desc">A massive slice of campus pizza plus a fountain drink. The ultimate college survival kit.</p>
+          <button class="btn-primary rc-btn" onclick="redeem(500)">Redeem Now</button>
+        </div>
+      </div>
+
+      <!-- Item 4 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(124,58,237,0.2);">🗝️</div>
+        <div class="rc-body">
+          <div class="rc-cost">800 pts</div>
+          <h3 class="rc-title">Study Room Overlord</h3>
+          <p class="rc-desc">Gain 1-week priority booking access to the best glass study rooms in the library. Cannot be kicked out.</p>
+          <button class="btn-primary rc-btn" onclick="redeem(800)">Redeem Now</button>
+        </div>
+      </div>
+
+      <!-- Item 5 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(22,163,74,0.2);">👕</div>
+        <div class="rc-body">
+          <div class="rc-cost">1,500 pts</div>
+          <h3 class="rc-title">Bridgr "God Tier" Hoodie</h3>
+          <p class="rc-desc">An ultra-premium, heavyweight hoodie that proves to everyone you know what you're doing.</p>
+          <button class="btn-primary rc-btn" style="background: var(--text-muted); border-color: var(--text-muted); color: white; cursor: not-allowed;" disabled>Not enough pts</button>
+        </div>
+      </div>
+
+      <!-- Item 6 -->
+      <div class="reward-card reveal">
+        <div class="rc-img" style="background: rgba(251,146,60,0.2);">💎</div>
+        <div class="rc-body">
+          <div class="rc-cost">5,000 pts</div>
+          <h3 class="rc-title">Semester Tuition?</h3>
+          <p class="rc-desc">We can't actually pay your tuition, but we will send you a handwritten thank you card from the founders.</p>
+          <button class="btn-primary rc-btn" style="background: var(--text-muted); border-color: var(--text-muted); color: white; cursor: not-allowed;" disabled>Not enough pts</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="logo">BRIDGR</div>
+      <p class="footer-sub">Built by students who were tired of being stuck at 2am.</p>
+      <div class="footer-links">
+        <a href="#">GitHub</a><a href="#">Twitter</a><a href="#">Discord</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function redeem(cost) {
+      const balanceEl = document.getElementById('userPoints');
+      let current = parseInt(balanceEl.textContent.replace(/,/g, ''));
+      if (current >= cost) {
+        current -= cost;
+        balanceEl.textContent = current.toLocaleString();
+        alert('Reward successfully redeemed! Check your student email for instructions.');
+      } else {
+        alert('Not enough karma points!');
+      }
+    }
+  </script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/transitions.js"></script>
+</body>
+</html>
