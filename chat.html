@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Campus Chat — Bridgr</title>
+  <meta name="description" content="General chat for campus students to connect and solve problems." />
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/pod.css" />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/chat.css" />
+</head>
+
+<body>
+  <div class="page-loader active" id="pageLoader">
+    <div style="display: flex; flex-direction: column; align-items: center;">
+      <img src="img/loading_animation.gif" alt="Loading..." class="loader-img">
+      <div class="loader-text">Loading.....</div>
+    </div>
+  </div>
+
+  <nav class="nav scrolled" id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="logo">BRIDGR<span class="logo-dot">.</span></a>
+      <ul class="nav-links">
+        <li><a href="discover.html">Discover</a></li>
+        <li><a href="map.html">Campus Map</a></li>
+        <li><a href="rooms.html">Rooms</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="leaderboard.html">Leaderboard</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="login.html" class="nav-avatar" title="Login">AR</a>
+        <a href="post.html" class="btn-primary nav-cta">Post a problem</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="events-hero" style="position: relative; overflow: hidden; padding-top: var(--space-2xl); padding-bottom: var(--space-lg);">
+    <div class="pod-blob pod-blob-orange" style="width:400px; height:560px; top:0; right:-30px; animation-delay:-2s;"></div>
+    <div class="pod-blob pod-blob-blue" style="width:240px; height:320px; bottom:-50px; left:12%; animation-delay:-5s;"></div>
+    <div class="pod-star" style="top:15%; left:3%; width:56px; height:56px; animation-duration:18s;">
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="56" height="56"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/></svg>
+    </div>
+
+    <div class="pod-split" style="min-height: auto; padding-top:0; padding-bottom:0; align-items: center;">
+      <div class="pod-split-left">
+        <div class="pod-eyebrow" style="font-size: 0.9rem; font-weight: 700; letter-spacing: 0.1em; color: var(--charcoal); background: var(--yellow); display: inline-flex; padding: 4px 12px; gap: 8px;">💬 CAMPUS COMMONS</div>
+        <h1 class="pod-headline">
+          Talk to<br/>
+          <span class="accent">Everyone.</span><br/>
+          Anytime,<br/>
+          <span style="color: var(--orange);">Anywhere.</span>
+        </h1>
+        <p class="pod-subhead" style="font-weight: 700;">
+          The general campus chat. Ask questions, share memes, or find someone who also doesn't know what is going on in class.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <main class="chat-main">
+    <div class="chat-container">
+      <div class="chat-sidebar">
+        <div class="chat-sidebar-header">
+          <h3>Channels</h3>
+        </div>
+        <ul class="chat-channels">
+          <li class="active"># general</li>
+          <li># class-help</li>
+          <li># random</li>
+          <li># looking-for-group</li>
+        </ul>
+        <div class="chat-sidebar-header" style="margin-top: 24px;">
+          <h3>Online (12)</h3>
+        </div>
+        <ul class="chat-users" id="chatUsers">
+          <li><span class="status online"></span> Aryan Rai</li>
+          <li><span class="status online"></span> Sarah Jenkins</li>
+          <li><span class="status online"></span> Mike Ross</li>
+          <li><span class="status idle"></span> Emily Chen</li>
+        </ul>
+      </div>
+
+      <div class="chat-area">
+        <div class="chat-header">
+          <h2># general</h2>
+          <span class="chat-topic">General campus discussion and vibes.</span>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+          <div class="message">
+            <div class="msg-avatar" style="background: var(--yellow);">SJ</div>
+            <div class="msg-content">
+              <div class="msg-header">
+                <span class="msg-name">Sarah Jenkins</span>
+                <span class="msg-time">Today at 10:42 AM</span>
+              </div>
+              <div class="msg-text">Does anyone know if the library is still open?</div>
+            </div>
+          </div>
+
+          <div class="message">
+            <div class="msg-avatar" style="background: var(--blue); color: white;">MR</div>
+            <div class="msg-content">
+              <div class="msg-header">
+                <span class="msg-name">Mike Ross</span>
+                <span class="msg-time">Today at 10:45 AM</span>
+              </div>
+              <div class="msg-text">Yeah, it's open until midnight. I'm on the 2nd floor rn.</div>
+            </div>
+          </div>
+          
+        </div>
+
+        <div class="chat-input-area">
+          <form id="chatForm">
+            <input type="text" id="chatInput" placeholder="Message #general..." autocomplete="off" />
+            <button type="submit" class="btn-chat-send">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="js/chat.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/transitions.js"></script>
+</body>
+</html>
