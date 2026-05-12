@@ -21,8 +21,8 @@ window.addEventListener('pageshow', (event) => {
 
 // Add floating chat button
 window.addEventListener('DOMContentLoaded', () => {
-  // Don't add if we're already on the chat page
-  if (window.location.pathname.endsWith('chat.html')) return;
+  // Don't add if we're already on the chat page or login page
+  if (window.location.pathname.endsWith('chat.html') || window.location.pathname.endsWith('login.html')) return;
 
   const chatBtn = document.createElement('a');
   chatBtn.href = 'chat.html';
