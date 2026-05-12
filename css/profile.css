@@ -120,11 +120,11 @@ textarea {
 /* ═══ PROFILE HEADER ═══ */
 .prof-header {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-xl);
   overflow: hidden;
-  margin-bottom: 28px;
-  box-shadow: 0 2px 16px rgba(23, 30, 25, .07);
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-brutal);
 }
 
 .ph-banner {
@@ -218,8 +218,8 @@ textarea {
   background-image: url('../img/pp_logined.png');
   background-size: cover;
   background-position: center;
-  border: 4px solid #fff;
-  box-shadow: 0 2px 16px rgba(23, 30, 25, .12);
+  border: 3px solid var(--charcoal);
+  box-shadow: 4px 4px 0 var(--charcoal);
 }
 
 .ph-av-ring {
@@ -371,8 +371,9 @@ textarea {
   color: var(--charcoal);
   font-weight: 600;
   font-size: 1rem;
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-md);
-  box-shadow: 0 0 20px rgba(255, 225, 124, .25);
+  box-shadow: var(--shadow-brutal);
   transition: opacity .2s, transform .2s, box-shadow .2s;
 }
 
@@ -382,7 +383,35 @@ textarea {
   box-shadow: 0 0 32px rgba(255, 225, 124, .45);
 }
 
-/* PROFILE GRID */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 24px;
+  background: #fff;
+  color: var(--charcoal);
+  font-weight: 600;
+  font-size: 1rem;
+  border: 2px solid var(--charcoal);
+  border-radius: var(--r-md);
+  box-shadow: var(--shadow-brutal);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.btn-ghost:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal-hover);
+}
+
+#logoutBtn {
+  color: var(--red);
+  border-color: var(--red);
+  box-shadow: 4px 4px 0 var(--red);
+}
+
+#logoutBtn:hover {
+  box-shadow: 6px 6px 0 var(--red);
+}
 .profile-grid {
   display: grid;
   grid-template-columns: 340px 1fr;
@@ -400,15 +429,17 @@ textarea {
 /* CARD */
 .card {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--charcoal);
   color: var(--text-primary);
-  border-radius: var(--r-xl);
+  border-radius: var(--r-lg);
   padding: 24px;
-  transition: border-color .3s;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: var(--shadow-brutal);
 }
 
 .card:hover {
-  border-color: var(--border-h);
+  transform: translate(-2px, -2px);
+  box-shadow: var(--shadow-brutal-hover);
 }
 
 .card-label {
@@ -437,10 +468,11 @@ textarea {
 
 .stat-item {
   background: var(--surface);
-  border: 1px solid var(--border);
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-md);
   padding: 16px;
   text-align: center;
+  box-shadow: 4px 4px 0 var(--charcoal);
 }
 
 .stat-num {
@@ -721,17 +753,20 @@ textarea {
 
 .session-item {
   background: var(--surface-2);
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-md);
   padding: 14px;
   display: flex;
   gap: 12px;
   align-items: flex-start;
-  transition: transform .2s;
+  transition: transform .2s, box-shadow .2s;
   cursor: default;
+  box-shadow: 4px 4px 0 var(--charcoal);
 }
 
 .session-item:hover {
-  transform: translateX(4px);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--charcoal);
 }
 
 .si-icon {
@@ -807,14 +842,16 @@ textarea {
 
 .review-item {
   background: var(--surface-2);
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-md);
   padding: 16px;
-  border-left: 3px solid rgba(255, 225, 124, .3);
-  transition: border-color .2s;
+  transition: transform .2s, box-shadow .2s;
+  box-shadow: 4px 4px 0 var(--charcoal);
 }
 
 .review-item:hover {
-  border-color: var(--yellow);
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--charcoal);
 }
 
 .ri-top {
@@ -922,18 +959,18 @@ textarea {
   gap: 7px;
   padding: 16px 14px;
   border-radius: var(--r-lg);
-  border: 1px solid var(--border);
+  border: 2px solid var(--charcoal);
   background: var(--surface-2);
   min-width: 90px;
   cursor: default;
-  transition: all .3s var(--ease-spring);
+  transition: all .2s;
   position: relative;
+  box-shadow: 4px 4px 0 var(--charcoal);
 }
 
 .badge-item:hover {
-  transform: translateY(-6px) scale(1.04);
-  border-color: var(--bd, rgba(255, 225, 124, .35));
-  box-shadow: 0 0 24px var(--bd, rgba(255, 225, 124, .15));
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 var(--charcoal);
 }
 
 .badge-item.locked-badge {
@@ -1009,14 +1046,14 @@ textarea {
 .ping-modal {
   background: var(--bg);
   color: var(--text-primary);
-  border: 1px solid var(--border);
+  border: 2px solid var(--charcoal);
   border-radius: var(--r-xl);
   padding: 36px;
-  width: min(420px, calc(100vw-40px));
+  width: min(420px, calc(100vw - 40px));
   position: relative;
   transform: translateY(20px) scale(.97);
-  transition: transform .4s var(--ease-out);
-  box-shadow: 0 4px 40px rgba(23, 30, 25, .12);
+  transition: transform .4s var(--ease-out), box-shadow .4s;
+  box-shadow: var(--shadow-brutal);
 }
 
 .ping-backdrop.open .ping-modal {
@@ -1091,10 +1128,11 @@ textarea {
   padding: 14px;
   border-radius: var(--r-md);
   background: var(--yellow);
-  color: var(--charcoal, #171e19);
+  color: var(--charcoal);
   font-weight: 700;
   font-size: .95rem;
-  box-shadow: 0 0 20px rgba(255, 225, 124, .25);
+  border: 2px solid var(--charcoal);
+  box-shadow: var(--shadow-brutal);
   transition: all .2s;
   margin-bottom: 10px;
 }

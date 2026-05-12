@@ -45,10 +45,15 @@
 
   <!-- REPETITION: Same orange/blue blobs + rotating star as all pages -->
   <div style="position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;" aria-hidden="true">
-    <div class="pod-blob pod-blob-orange" style="width:340px; height:480px; top:0; right:-20px; animation-delay:-3s;"></div>
-    <div class="pod-blob pod-blob-blue" style="width:200px; height:280px; bottom:-30px; left:8%; animation-delay:-7s;"></div>
+    <div class="pod-blob pod-blob-orange" style="width:340px; height:480px; top:0; right:-20px; animation-delay:-3s;">
+    </div>
+    <div class="pod-blob pod-blob-blue" style="width:200px; height:280px; bottom:-30px; left:8%; animation-delay:-7s;">
+    </div>
     <div class="pod-star" style="top:18%; left:2%; width:48px; height:48px; animation-duration:22s;">
-      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="48" height="48"><path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z"/></svg>
+      <svg viewBox="0 0 100 100" fill="none" stroke="var(--charcoal)" stroke-width="5" stroke-linecap="round" width="48"
+        height="48">
+        <path d="M50 10 L60 40 L90 50 L60 60 L50 90 L40 60 L10 50 L40 40 Z" />
+      </svg>
     </div>
   </div>
 
@@ -87,10 +92,7 @@
       </div>
       <div class="ph-actions">
         <button class="btn-ping" id="editProfileBtn">Edit profile ✏️</button>
-        <button class="btn-ghost">View schedule</button>
-        <button class="btn-ghost">Share profile</button>
-        <button class="btn-ghost" id="logoutBtn" style="color: var(--red); border-color: var(--red);">Log out
-          🚪</button>
+        <button class="btn-ghost" id="logoutBtn">Log out 🚪</button>
       </div>
     </header>
 
@@ -349,7 +351,7 @@
 
   <script src="js/profile.js"></script>
   <script src="js/auth.js"></script>
-<script src="js/transitions.js"></script>
+  <script src="js/transitions.js"></script>
 </body>
 
 </html>
