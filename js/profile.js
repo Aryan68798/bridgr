@@ -146,7 +146,7 @@ const observer = new IntersectionObserver(entries => {
     }
     observer.unobserve(el);
   });
-}, { threshold: 0.15 });
+}, { threshold: 0, rootMargin: '50px' });
 
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
@@ -221,7 +221,6 @@ document.getElementById('emSave').addEventListener('click', function() {
   
   // Also update avatar initials if possible (just taking first letters)
   const initials = name.split(' ').map(n=>n[0]).join('').substring(0,2).toUpperCase();
-  document.getElementById('phAvatar').textContent = initials;
   PROFILE.initials = initials;
   
   this.textContent = 'Saved! ✓';
