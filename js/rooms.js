@@ -35,7 +35,7 @@ const ROOMS = [
 
 // ── State ──
 let selectedRoom = null;
-let activeFilter = 'all';
+let activeFilters = new Set();
 let activeFloor = '1';
 let minCap = 2;
 let canvas, ctx, W, H;
@@ -194,9 +194,28 @@ function renderPins() {
 // ── FILTER ──
 function getFilteredRooms() {
   return ROOMS.filter(r => {
-    const statusOk = activeFilter === 'all' || r.status === activeFilter || (activeFilter === 'whiteboard' && r.equip.some(e => e.toLowerCase().includes('whiteboard'))) || (activeFilter === 'screen' && r.equip.some(e => e.toLowerCase().includes('screen'))) || (activeFilter === 'ac' && r.equip.some(e => e.toLowerCase().includes('ac')));
+    // If no filters active, show all
+    if (activeFilters.size === 0) {
+      return r.cap >= minCap;
+    }
+
+    // Separate status filters from equipment filters
+    const statusFilters = ['available', 'occupied', 'soon'];
+    const equipFilters = ['whiteboard', 'screen', 'ac'];
+    
+    const activeStatus = [...activeFilters].filter(f => statusFilters.includes(f));
+    const activeEquip = [...activeFilters].filter(f => equipFilters.includes(f));
+
+    // Status check: room matches ANY active status (OR logic)
+    let statusOk = activeStatus.length === 0 || activeStatus.includes(r.status);
+
+    // Equipment check: room has ALL active equipment (AND logic)
+    let equipOk = activeEquip.every(eq => 
+      r.equip.some(e => e.toLowerCase().includes(eq))
+    );
+
     const capOk = r.cap >= minCap;
-    return statusOk && capOk;
+    return statusOk && equipOk && capOk;
   });
 }
 
@@ -308,7 +327,7 @@ document.getElementById('bmConfirm').addEventListener('click', () => {
   if (selectedRoom) {
     selectedRoom.status = 'occupied';
     selectedRoom.session = sessionTitle;
-    selectedRoom.creator = currentUserEmail;
+    selectedRoom.creator = isLoggedIn;
     selectedRoom.pinColor = '#f87171'; // Red for occupied
 
     // Update the main ROOMS array
@@ -337,13 +356,37 @@ document.getElementById('bmConfirm').addEventListener('click', () => {
 
 document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeBooking(); document.getElementById('roomCard').classList.remove('open'); selectedRoom = null; renderPins(); renderList(); } });
 
-// ── FILTER WIRING ──
+// ── FILTER WIRING (Multi-Select) ──
 document.getElementById('filterRow').addEventListener('click', e => {
   const btn = e.target.closest('.fr-btn');
   if (!btn) return;
-  document.querySelectorAll('.fr-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  activeFilter = btn.dataset.f;
+  
+  const f = btn.dataset.f;
+  
+  if (f === 'all') {
+    // 'All Rooms' clears everything
+    activeFilters.clear();
+    document.querySelectorAll('.fr-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  } else {
+    // Toggle this filter on/off
+    // Remove 'All' highlight first
+    document.querySelector('.fr-btn[data-f="all"]')?.classList.remove('active');
+    
+    if (activeFilters.has(f)) {
+      activeFilters.delete(f);
+      btn.classList.remove('active');
+    } else {
+      activeFilters.add(f);
+      btn.classList.add('active');
+    }
+    
+    // If nothing selected, re-highlight 'All'
+    if (activeFilters.size === 0) {
+      document.querySelector('.fr-btn[data-f="all"]')?.classList.add('active');
+    }
+  }
+  
   renderPins(); renderList();
 });
 
