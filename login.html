@@ -3,85 +3,276 @@
 
 <head>
   <meta charset="UTF-8" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Prata&display=swap"
-    rel="stylesheet" />
-  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
   <title>Login — Bridgr</title>
   <meta name="description" content="Login to Bridgr" />
 
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/login.css" />
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Prata&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+
+  <!-- CDNs -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <script>window.framerMotion = window.Motion;</script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            orange: '#ff5e3a',
+            yellow: '#ffc800',
+            blue: '#3b82f6',
+            charcoal: '#111111',
+            bg: '#fbf9f6',
+          },
+          fontFamily: {
+            display: ['Prata', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['Satoshi', 'Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            'brutal': '4px 4px 0px #111111',
+            'brutal-lg': '10px 10px 0px #111111',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grainy Texture */
+    .grain-texture::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05; mix-blend-mode: overlay;
+    }
+
+    .blob-jagged { clip-path: polygon(10% 0, 15% 5%, 25% 0, 30% 6%, 40% 0, 45% 4%, 55% 0, 60% 5%, 70% 0, 75% 6%, 85% 0, 90% 4%, 100% 0, 95% 10%, 100% 20%, 94% 30%, 100% 40%, 96% 50%, 100% 60%, 95% 70%, 100% 80%, 94% 90%, 100% 100%, 90% 95%, 80% 100%, 70% 94%, 60% 100%, 50% 95%, 40% 100%, 30% 96%, 20% 100%, 10% 95%, 0 100%, 5% 90%, 0 80%, 6% 70%, 0 60%, 4% 50%, 0 40%, 5% 30%, 0 20%, 6% 10%, 0 0); }
+    .star-jagged { clip-path: polygon(50% 0%, 61% 16%, 80% 10%, 82% 30%, 100% 41%, 89% 57%, 93% 76%, 74% 82%, 63% 100%, 46% 89%, 28% 97%, 23% 78%, 4% 80%, 13% 62%, 0% 45%, 17% 31%, 10% 13%, 29% 15%, 39% 0%); }
+
+    body::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; background-color: #fbf9f6; }
+    .brutal-border { border: 4px solid #111111; }
+    .brutal-border-thin { border: 2px solid #111111; }
+  </style>
 </head>
 
-<body class="login-page">
-  <div class="page-loader active" id="pageLoader">
-    <div style="display: flex; flex-direction: column; align-items: center;">
-      <img src="img/loading_animation.gif" alt="Loading..." class="loader-img">
-      <div class="loader-text">Loading.....</div>
-    </div>
-  </div>
+  <div id="root" class="w-full min-h-screen"></div>
 
-  <div class="login-card">
-    <!-- LEFT PANEL -->
-    <div class="login-left">
-      <a href="index.html" class="login-brand">BRIDGR.</a>
-      <img src="img/login_doodle.png" alt="Login Doodle Illustration" />
-    </div>
+  <script type="text/babel">
+    const { useState, useEffect, useRef } = React;
+    const { motion, AnimatePresence } = framerMotion;
 
-    <!-- RIGHT PANEL -->
-    <div class="login-right">
-      <a href="index.html" class="login-close" aria-label="Close">✕</a>
+    const Doodle = ({ type, color, size, pos, delay }) => {
+      const paths = {
+        zigzag: "M0 10 L10 0 L20 10 L30 0 L40 10",
+        curve: "M0 20 Q10 0 20 20 T40 20",
+        dots: "M5 5 h1 M15 5 h1 M25 5 h1"
+      };
 
-      <h1 class="login-title">Login</h1>
+      return (
+        <motion.div
+          className="absolute pointer-events-none z-0"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          style={{ left: pos.x, top: pos.y }}
+        >
+          <motion.svg
+            width={size * 2}
+            height={size}
+            viewBox={`0 0 40 20`}
+            animate={{ x: [0, 10, 0], rotate: [0, 5, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay }}
+          >
+            <path d={paths[type] || paths.zigzag} fill="none" stroke={color} strokeWidth="6" strokeLinecap="round" />
+          </motion.svg>
+        </motion.div>
+      );
+    };
 
-      <form class="login-form"
-        onsubmit="event.preventDefault(); localStorage.setItem('isLoggedIn', 'true'); window.location.href='index.html';">
+    const Character = ({ type, color, size, pos, delay, mousePos }) => {
+      const eyeRef = useRef(null);
+      const [eyeOffset, setEyeOffset] = useState({ x: 0, y: 0 });
 
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <div class="form-input-wrap">
-            <span class="form-input-icon">✉️</span>
-            <input type="email" class="form-input" placeholder="daniel21fisher@gmail.com" required />
+      useEffect(() => {
+        if (!eyeRef.current) return;
+        const rect = eyeRef.current.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+        const dx = mousePos.x - centerX;
+        const dy = mousePos.y - centerY;
+        const angle = Math.atan2(dy, dx);
+        const distance = Math.min(8, Math.hypot(dx, dy) / 50);
+        setEyeOffset({ x: Math.cos(angle) * distance, y: Math.sin(angle) * distance });
+      }, [mousePos]);
+
+      const shapeClass = type === 'jagged' ? 'blob-jagged' : type === 'star' ? 'star-jagged' : 'rounded-[20%]';
+
+      return (
+        <motion.div
+          className="absolute pointer-events-none z-0"
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ type: "spring", stiffness: 100, delay: delay * 0.1 }}
+          style={{ left: pos.x, top: pos.y }}
+        >
+          <motion.div 
+            animate={{ y: [0, -15, 0], rotate: [0, 2, -2, 0] }}
+            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay }}
+            className={`brutal-border shadow-brutal ${shapeClass}`}
+            style={{ width: size, height: size, backgroundColor: color }}
+          >
+            <div ref={eyeRef} className="flex gap-2.5 absolute top-1/3 left-1/2 -translate-x-1/2">
+              {[1, 2].map(i => (
+                <div key={i} className="w-7 h-7 bg-white brutal-border-thin rounded-full flex items-center justify-center">
+                  <motion.div className="w-3.5 h-3.5 bg-charcoal rounded-full" style={{ x: eyeOffset.x, y: eyeOffset.y }} />
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
+      );
+    };
+
+    const App = () => {
+      const [showPassword, setShowPassword] = useState(false);
+      const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+
+      useEffect(() => {
+        const handleMouseMove = (e) => setMousePos({ x: e.clientX, y: e.clientY });
+        window.addEventListener('mousemove', handleMouseMove);
+        return () => window.removeEventListener('mousemove', handleMouseMove);
+      }, []);
+
+      return (
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="w-full min-h-screen flex flex-col md:flex-row overflow-hidden bg-white"
+        >
+          <div className="flex-1 relative border-0 overflow-hidden flex flex-col items-center justify-center p-12">
+            <div className="absolute inset-0">
+              <Character type="jagged" color="#ff5e3a" size={180} pos={{ x: '10%', y: '10%' }} delay={0} mousePos={mousePos} />
+              <Character type="star" color="#3b82f6" size={150} pos={{ x: '70%', y: '70%' }} delay={1} mousePos={mousePos} />
+              <Character type="rect" color="#ffc800" size={120} pos={{ x: '60%', y: '15%' }} delay={2} mousePos={mousePos} />
+              <Character type="jagged" color="#16a34a" size={110} pos={{ x: '5%', y: '75%' }} delay={3} mousePos={mousePos} />
+              <Character type="star" color="#7c3aed" size={90} pos={{ x: '15%', y: '45%' }} delay={4} mousePos={mousePos} />
+              <Character type="rect" color="#dc2626" size={100} pos={{ x: '80%', y: '35%' }} delay={5} mousePos={mousePos} />
+            </div>
+
+            <motion.div className="relative z-10 text-center">
+              <h2 className="text-6xl md:text-7xl font-display uppercase leading-[0.8] text-charcoal mb-6">
+                Think<br/> <span className="bg-orange text-white px-5 py-2 brutal-border-thin inline-block -rotate-2">Together.</span>
+              </h2>
+              <div className="font-mono text-sm md:text-base font-black bg-white brutal-border-thin py-3 px-6 shadow-brutal inline-block rotate-1">
+                CAMPUS HUB FOR BUILDERS.
+              </div>
+            </motion.div>
           </div>
-        </div>
 
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <div class="form-input-wrap">
-            <span class="form-input-icon">👁️</span>
-            <input type="password" class="form-input" placeholder="••••••••" required />
+          {/* RIGHT: Login Box */}
+          <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-16 relative">
+            {/* Global Decorative Doodles spread over entire page */}
+            <div className="fixed inset-0 pointer-events-none">
+              <Doodle type="zigzag" color="#ff5e3a" size={40} pos={{ x: '30%', y: '20%' }} delay={1} />
+              <Doodle type="curve" color="#3b82f6" size={50} pos={{ x: '70%', y: '30%' }} delay={2} />
+              <Doodle type="zigzag" color="#16a34a" size={30} pos={{ x: '40%', y: '80%' }} delay={3} />
+              <Doodle type="dots" color="#7c3aed" size={40} pos={{ x: '15%', y: '70%' }} delay={4} />
+              <Doodle type="zigzag" color="#ffc800" size={60} pos={{ x: '85%', y: '15%' }} delay={5} />
+              <Doodle type="curve" color="#dc2626" size={40} pos={{ x: '55%', y: '85%' }} delay={6} />
+              <Doodle type="dots" color="#3b82f6" size={30} pos={{ x: '5%', y: '40%' }} delay={7} />
+              <Doodle type="zigzag" color="#ff5e3a" size={50} pos={{ x: '90%', y: '50%' }} delay={8} />
+              <Doodle type="curve" color="#16a34a" size={40} pos={{ x: '20%', y: '5%' }} delay={9} />
+              <Doodle type="dots" color="#ffc800" size={30} pos={{ x: '80%', y: '85%' }} delay={10} />
+              <Doodle type="zigzag" color="#7c3aed" size={45} pos={{ x: '50%', y: '90%' }} delay={11} />
+            </div>
+
+            <div className="w-full max-w-sm relative z-10">
+              <div className="flex items-center mb-10">
+                <a href="index.html" className="text-2xl font-display font-black tracking-tighter">BRIDGR.</a>
+              </div>
+
+              <div className="mb-10">
+                <h1 className="text-4xl font-display uppercase leading-none mb-3">Login</h1>
+                <div className="h-1.5 w-16 bg-orange brutal-border-thin"></div>
+              </div>
+
+              <form className="space-y-6" onSubmit={(e) => {
+                e.preventDefault();
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'index.html';
+              }}>
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Email Address</label>
+                  <input 
+                    type="email" 
+                    placeholder="you@university.edu" 
+                    className="w-full py-4 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-yellow/5 outline-none transition-all"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Secret Password</label>
+                  <div className="relative">
+                    <input 
+                      type={showPassword ? "text" : "password"} 
+                      placeholder="••••••••" 
+                      className="w-full py-4 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-yellow/5 outline-none transition-all"
+                      required
+                    />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-4 text-xl">
+                      {showPassword ? "🙈" : "👁️"}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="flex items-center justify-between font-mono text-[10px] font-black uppercase tracking-widest">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input type="checkbox" className="w-4 h-4 brutal-border-thin accent-charcoal" />
+                    <span>Save Session</span>
+                  </label>
+                  <a href="#" className="text-orange hover:underline underline-offset-4">Forgot?</a>
+                </div>
+
+                <div className="pt-4">
+                  <motion.button 
+                    whileHover={{ 
+                      backgroundColor: '#ff5e3a', 
+                      translate: '-4px -4px', 
+                      boxShadow: '10px 10px 0px #111111' 
+                    }}
+                    whileTap={{ translate: '0 0', boxShadow: '0 0 0 #111111' }}
+                    className="w-full bg-charcoal text-white py-5 brutal-border-thin font-extrabold text-xl shadow-brutal transition-all"
+                  >
+                    CONTINUE ➜
+                  </motion.button>
+                </div>
+              </form>
+
+              <div className="mt-10 text-center text-[10px] font-mono font-black uppercase tracking-widest">
+                New Here? <a href="#" className="text-orange hover:underline underline-offset-4 ml-1">Create Account</a>
+              </div>
+            </div>
           </div>
-        </div>
+        </motion.div>
+      );
+    };
 
-        <div class="form-options">
-          <a href="#" class="forgot-link">Forgot Password?</a>
-        </div>
-
-        <button type="submit" class="btn-primary login-submit">Log In</button>
-
-      </form>
-
-      <div class="login-divider">Or Continue With</div>
-
-      <div class="social-login">
-        <a href="#" class="social-btn">🅖</a>
-        <a href="#" class="social-btn" style="color: var(--blue);">🅕</a>
-        <a href="#" class="social-btn"></a>
-      </div>
-
-      <div class="signup-text">
-        Don't have an account? <a href="#" class="signup-link">Sign Up here</a>
-      </div>
-
-    </div>
-  </div>
-
-  <script src="js/main.js"></script>
-  <script src="js/transitions.js"></script>
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
 </body>
 
 </html>
