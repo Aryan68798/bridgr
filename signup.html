@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <title>Login — Bridgr</title>
-  <meta name="description" content="Login to Bridgr" />
+  <title>Join Bridgr — Create Account</title>
+  <meta name="description" content="Create your Bridgr account" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -68,6 +68,7 @@
   </style>
 </head>
 
+<body>
   <div id="root" class="w-full min-h-screen"></div>
 
   <script type="text/babel">
@@ -173,15 +174,15 @@
 
             <motion.div className="relative z-10 text-center">
               <h2 className="text-6xl md:text-7xl font-display uppercase leading-[0.8] text-charcoal mb-6">
-                Think<br/> <span className="bg-orange text-white px-5 py-2 brutal-border-thin inline-block -rotate-2">Together.</span>
+                Build<br/> <span className="bg-blue text-white px-5 py-2 brutal-border-thin inline-block rotate-2">Together.</span>
               </h2>
-              <div className="font-mono text-sm md:text-base font-black bg-white brutal-border-thin py-3 px-6 shadow-brutal inline-block rotate-1">
-                CAMPUS HUB FOR BUILDERS.
+              <div className="font-mono text-sm md:text-base font-black bg-white brutal-border-thin py-3 px-6 shadow-brutal inline-block -rotate-1">
+                JOIN THE CAMPUS NETWORK.
               </div>
             </motion.div>
           </div>
 
-          {/* RIGHT: Login Box */}
+          {/* RIGHT: Signup Box */}
           <div className="flex-1 flex flex-col items-center justify-center p-8 md:p-16 relative">
             {/* Global Decorative Doodles spread over entire page */}
             <div className="fixed inset-0 pointer-events-none">
@@ -204,65 +205,67 @@
               </div>
 
               <div className="mb-10">
-                <h1 className="text-4xl font-display uppercase leading-none mb-3">Login</h1>
-                <div className="h-1.5 w-16 bg-orange brutal-border-thin"></div>
+                <h1 className="text-4xl font-display uppercase leading-none mb-3">Join</h1>
+                <div className="h-1.5 w-16 bg-blue brutal-border-thin"></div>
               </div>
 
-              <form className="space-y-6" onSubmit={(e) => {
+              <form className="space-y-4" onSubmit={(e) => {
                 e.preventDefault();
                 localStorage.setItem('isLoggedIn', 'true');
-                window.location.href = 'index.html';
+                window.location.href = 'avatar.html';
               }}>
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Email Address</label>
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Full Name</label>
                   <input 
-                    type="email" 
-                    placeholder="you@university.edu" 
-                    className="w-full py-4 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-yellow/5 outline-none transition-all"
+                    type="text" 
+                    placeholder="Alex Smith" 
+                    className="w-full py-3 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-blue/5 outline-none transition-all"
                     required
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Secret Password</label>
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">College Email</label>
+                  <input 
+                    type="email" 
+                    placeholder="you@university.edu" 
+                    className="w-full py-3 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-blue/5 outline-none transition-all"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Password</label>
                   <div className="relative">
                     <input 
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
-                      className="w-full py-4 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-yellow/5 outline-none transition-all"
+                      className="w-full py-3 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-blue/5 outline-none transition-all"
                       required
                     />
-                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-4 text-xl">
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-4 top-3 text-xl">
                       {showPassword ? "🙈" : "👁️"}
                     </button>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between font-mono text-[10px] font-black uppercase tracking-widest">
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <input type="checkbox" className="w-4 h-4 brutal-border-thin accent-charcoal" />
-                    <span>Save Session</span>
-                  </label>
-                  <a href="#" className="text-orange hover:underline underline-offset-4">Forgot?</a>
-                </div>
-
                 <div className="pt-4">
                   <motion.button 
                     whileHover={{ 
-                      backgroundColor: '#ff5e3a', 
+                      backgroundColor: '#3b82f6', 
                       translate: '-4px -4px', 
                       boxShadow: '10px 10px 0px #111111' 
                     }}
                     whileTap={{ translate: '0 0', boxShadow: '0 0 0 #111111' }}
-                    className="w-full bg-charcoal text-white py-5 brutal-border-thin font-extrabold text-xl shadow-brutal transition-all"
+                    className="w-full bg-charcoal text-white py-4 brutal-border-thin font-extrabold text-xl shadow-brutal transition-all"
                   >
-                    CONTINUE ➜
+                    GET STARTED ➜
                   </motion.button>
                 </div>
               </form>
 
-              <div className="mt-10 text-center text-[10px] font-mono font-black uppercase tracking-widest">
-                New Here? <a href="signup.html" className="text-orange hover:underline underline-offset-4 ml-1">Create Account</a>
+              <div className="mt-8 text-center text-[10px] font-mono font-black uppercase tracking-widest">
+                Already member? <a href="login.html" className="text-blue hover:underline underline-offset-4 ml-1">Login here</a>
               </div>
             </div>
           </div>
