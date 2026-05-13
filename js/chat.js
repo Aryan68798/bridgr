@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const chatInput = document.getElementById('chatInput');
   const chatMessages = document.getElementById('chatMessages');
   const chatChannels = document.querySelectorAll('.chat-channels li');
+  const chatUsersList = document.querySelectorAll('.chat-users li');
   const chatHeaderTitle = document.querySelector('.chat-header h2');
   const chatHeaderTopic = document.querySelector('.chat-topic');
 
@@ -77,6 +78,40 @@ document.addEventListener('DOMContentLoaded', () => {
           isSelf: false
         }
       ]
+    },
+    'Sarah Jenkins': {
+      name: 'Sarah Jenkins',
+      topic: 'Direct Message',
+      messages: [
+        {
+          name: 'Sarah Jenkins',
+          initials: 'SJ',
+          color: 'var(--yellow)',
+          time: 'Yesterday',
+          text: 'Hey! Are you coming to the study group later?',
+          isSelf: false
+        }
+      ]
+    },
+    'Mike Ross': {
+      name: 'Mike Ross',
+      topic: 'Direct Message',
+      messages: [
+        {
+          name: 'Mike Ross',
+          initials: 'MR',
+          color: 'var(--blue)',
+          time: '2 hours ago',
+          text: 'I found that book you were looking for in the library!',
+          isSelf: false,
+          textColor: 'white'
+        }
+      ]
+    },
+    'Emily Chen': {
+      name: 'Emily Chen',
+      topic: 'Direct Message',
+      messages: []
     }
   };
 
@@ -118,7 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     activeChannel = channelId;
     const channelData = channels[channelId];
     
-    // Update active class on sidebar
+    // Update active class on sidebar channels
     chatChannels.forEach(li => {
       const id = li.textContent.replace('# ', '').trim();
       if (id === channelId) {
@@ -128,8 +163,18 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Update active class on sidebar users
+    chatUsersList.forEach(li => {
+      const name = li.textContent.trim();
+      if (name === channelId) {
+        li.classList.add('active');
+      } else {
+        li.classList.remove('active');
+      }
+    });
+
     // Update Header
-    chatHeaderTitle.textContent = channelData.name;
+    chatHeaderTitle.textContent = channelData.name.startsWith('#') ? channelData.name : `@ ${channelData.name}`;
     chatHeaderTopic.textContent = channelData.topic;
     
     // Update Input placeholder
@@ -145,6 +190,16 @@ document.addEventListener('DOMContentLoaded', () => {
       const channelId = li.textContent.replace('# ', '').trim();
       if (channels[channelId] && channelId !== activeChannel) {
         switchChannel(channelId);
+      }
+    });
+  });
+
+  // Setup user click listeners (Direct Messages)
+  chatUsersList.forEach(li => {
+    li.addEventListener('click', () => {
+      const userName = li.textContent.trim();
+      if (channels[userName] && userName !== activeChannel) {
+        switchChannel(userName);
       }
     });
   });

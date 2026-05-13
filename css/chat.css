@@ -63,7 +63,7 @@
   color: var(--charcoal);
 }
 
-.chat-channels li.active {
+.chat-channels li.active, .chat-users li.active {
   background: var(--charcoal);
   color: white;
   box-shadow: var(--shadow-brutal-sm);
