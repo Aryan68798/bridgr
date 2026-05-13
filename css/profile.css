@@ -412,6 +412,7 @@ textarea {
 #logoutBtn:hover {
   box-shadow: 6px 6px 0 var(--red);
 }
+
 .profile-grid {
   display: grid;
   grid-template-columns: 340px 1fr;
@@ -739,9 +740,9 @@ textarea {
   font-size: .64rem;
   padding: 2px 8px;
   border-radius: var(--r-full);
-  background: rgba(255, 225, 124, .1);
-  border: 1px solid rgba(255, 225, 124, .15);
-  color: var(--yellow);
+  background: rgba(255, 94, 58, .1);
+  border: 1px solid rgba(255, 94, 58, .25);
+  color: var(--orange);
 }
 
 /* SESSIONS LIST */

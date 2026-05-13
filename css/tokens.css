@@ -96,7 +96,18 @@
 
 .nav-avatar:hover {
   transform: translate(-2px, -2px);
-  box-shadow: var(--shadow-brutal);
+  box-shadow: 6px 6px 0px var(--charcoal);
+  text-decoration: none;
+  color: #fff !important;
+}
+
+/* Prevent nav-active from overriding avatar styles */
+.nav-avatar.nav-active {
+  color: #fff !important;
+}
+
+.nav-avatar.nav-active::after {
+  display: none;
 }
 
 /* ── SHARED NAV ── */
@@ -149,7 +160,8 @@
   position: relative;
 }
 
-.nav-links a:hover, .nav-active {
+.nav-links a:hover,
+.nav-active {
   color: var(--charcoal) !important;
 }
 

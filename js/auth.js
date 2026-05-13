@@ -38,18 +38,27 @@ function bridgrUpdateNav() {
       avatar.title = 'View Profile (' + (user.name || 'User') + ')';
       
       if (user.avatar) {
-        // User has a profile picture
+        // User has an uploaded profile picture
         avatar.style.backgroundImage = "url('" + user.avatar + "')";
         avatar.style.backgroundSize = 'cover';
         avatar.style.backgroundPosition = 'center';
+        avatar.style.backgroundColor = '';
         avatar.innerHTML = '';
       } else {
-        // Show initials with aura gradient
-        avatar.style.background = user.aura || 'var(--orange)';
-        avatar.style.backgroundImage = '';
+        // Show initials with aura gradient (matches profile page exactly)
+        var aura = user.aura || 'var(--orange)';
+        // Gradients must be set via backgroundImage, solid colors via backgroundColor
+        if (aura.includes('gradient')) {
+          avatar.style.backgroundImage = aura;
+          avatar.style.backgroundColor = '';
+        } else {
+          avatar.style.backgroundImage = 'none';
+          avatar.style.backgroundColor = aura;
+        }
         avatar.style.color = 'white';
         avatar.style.fontWeight = 'bold';
         avatar.style.fontSize = '12px';
+        avatar.style.textShadow = '0 1px 2px rgba(0,0,0,0.3)';
         
         var name = user.name || 'User';
         var parts = name.trim().split(' ');
