@@ -235,8 +235,7 @@
                 };
 
                 localStorage.setItem('bridgr_users', JSON.stringify(users));
-                localStorage.setItem('bridgr_currentUser', email.toLowerCase());
-                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('isLoggedIn', email.toLowerCase());
                 
                 window.location.href = 'avatar.html';
               }}>

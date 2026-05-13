@@ -199,9 +199,9 @@
       const fileInputRef = useRef(null);
 
       // Get current user info from multi-user storage
-      const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
       const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
-      const currentUser = users[currentUserEmail] || { name: 'Alex Smith' };
+      const currentUser = isLoggedIn ? (users[isLoggedIn.toLowerCase()] || users[isLoggedIn]) : { name: 'Alex Smith' };
       const [userName, setUserName] = useState(currentUser.name);
 
       const getInitials = (name) => {
@@ -245,9 +245,10 @@
         setIsSaving(true);
         
         // Persist to multi-user storage
-        if (currentUserEmail && users[currentUserEmail]) {
-          users[currentUserEmail].avatar = avatarUrl;
-          users[currentUserEmail].aura = aura;
+        const userKey = isLoggedIn ? isLoggedIn.toLowerCase() : null;
+        if (userKey && users[userKey]) {
+          users[userKey].avatar = avatarUrl;
+          users[userKey].aura = aura;
           localStorage.setItem('bridgr_users', JSON.stringify(users));
         }
 

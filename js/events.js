@@ -1,196 +1,97 @@
 /* ── Bridgr Events & Sessions ── */
 
-const MOCK_EVENTS = [
-  {
-    id: 1,
-    title: "Late Night DSA Grind",
-    type: "Study Session",
-    typeClass: "study",
-    date: "Tonight at 10:00 PM",
-    location: "Library, 2nd Floor",
-    hostName: "Sneha Kumar",
-    hostAv: "SK",
-    hostBg: "var(--pink)",
-    attendees: 4,
-    maxAttendees: 8
-  },
-  {
-    id: 2,
-    title: "Intro to React Hooks",
-    type: "Workshop",
-    typeClass: "workshop",
-    date: "Tomorrow at 4:00 PM",
-    location: "Block A, Room 304",
-    hostName: "Aryan Rai",
-    hostAv: "AR",
-    hostBg: "var(--orange)",
-    attendees: 12,
-    maxAttendees: 20
-  },
-  {
-    id: 3,
-    title: "Post-Exam Chill & Rant",
-    type: "Casual",
-    typeClass: "chill",
-    date: "Friday at 6:00 PM",
-    location: "Cafe Coffee Day",
-    hostName: "Riya Shah",
-    hostAv: "RS",
-    hostBg: "var(--yellow)",
-    attendees: 8,
-    maxAttendees: 15
-  },
-  {
-    id: 4,
-    title: "OS Assignment Collab",
-    type: "Study Session",
-    typeClass: "study",
-    date: "Saturday at 1:00 PM",
-    location: "Hostel B, Common Room",
-    hostName: "Vikram Singh",
-    hostAv: "VS",
-    hostBg: "var(--blue)",
-    attendees: 6,
-    maxAttendees: 10
-  },
-  {
-    id: 5,
-    title: "UI Design Crit",
-    type: "Workshop",
-    typeClass: "workshop",
-    date: "Sunday at 2:00 PM",
-    location: "Lab Wing, Studio",
-    hostName: "Kavya Menon",
-    hostAv: "KM",
-    hostBg: "var(--purple)",
-    attendees: 5,
-    maxAttendees: 12
-  },
-  {
-    id: 6,
-    title: "Solidity for Beginners",
-    type: "Workshop",
-    typeClass: "workshop",
-    date: "Monday at 5:00 PM",
-    location: "Block D, Room 102",
-    hostName: "Rahul Tiwari",
-    hostAv: "RT",
-    hostBg: "var(--orange)",
-    attendees: 18,
-    maxAttendees: 25
-  },
-  {
-    id: 7,
-    title: "Maths Exam Prep",
-    type: "Study Session",
-    typeClass: "study",
-    date: "Tuesday at 7:00 PM",
-    location: "Library, Quiet Zone",
-    hostName: "Meera Pillai",
-    hostAv: "MP",
-    hostBg: "var(--pink)",
-    attendees: 10,
-    maxAttendees: 15
-  },
-  {
-    id: 8,
-    title: "Campus Photography Walk",
-    type: "Casual",
-    typeClass: "chill",
-    date: "Wednesday at 4:30 PM",
-    location: "Main Gate",
-    hostName: "Ishaan Khatter",
-    hostAv: "IK",
-    hostBg: "var(--blue)",
-    attendees: 3,
-    maxAttendees: 10
-  },
-  {
-    id: 9,
-    title: "Node.js API Masters",
-    type: "Workshop",
-    typeClass: "workshop",
-    date: "Thursday at 3:00 PM",
-    location: "Block A, Room 501",
-    hostName: "Kabir Joshi",
-    hostAv: "KJ",
-    hostBg: "var(--green)",
-    attendees: 22,
-    maxAttendees: 30
-  },
-  {
-    id: 10,
-    title: "Cybersecurity CTF Night",
-    type: "Competition",
-    typeClass: "study",
-    date: "Friday at 9:00 PM",
-    location: "Hostel B, Room 14",
-    hostName: "Harish Babu",
-    hostAv: "HB",
-    hostBg: "var(--charcoal)",
-    attendees: 8,
-    maxAttendees: 20
-  },
-  {
-    id: 11,
-    title: "Game Dev Jam",
-    type: "Casual",
-    typeClass: "chill",
-    date: "Saturday at 10:00 AM",
-    location: "CS Building Lobby",
-    hostName: "Rohan Das",
-    hostAv: "RD",
-    hostBg: "var(--yellow)",
-    attendees: 15,
-    maxAttendees: 40
-  },
-  {
-    id: 12,
-    title: "Motion Design GSAP",
-    type: "Workshop",
-    typeClass: "workshop",
-    date: "Sunday at 11:00 AM",
-    location: "Lab Wing, Media Room",
-    hostName: "Nisha Gupta",
-    hostAv: "NG",
-    hostBg: "var(--pink)",
-    attendees: 7,
-    maxAttendees: 15
-  }
+const DEFAULT_EVENTS = [
+  { id: 1, title: "Late Night DSA Grind", type: "Study Session", typeClass: "study", date: "Tonight at 10:00 PM", location: "Library, 2nd Floor", hostName: "Sneha Kumar", hostAv: "SK", hostBg: "var(--pink)", attendees: 4, maxAttendees: 8, creator: "system" },
+  { id: 2, title: "Intro to React Hooks", type: "Workshop", typeClass: "workshop", date: "Tomorrow at 4:00 PM", location: "Block A, Room 304", hostName: "Aryan Rai", hostAv: "AR", hostBg: "var(--orange)", attendees: 12, maxAttendees: 20, creator: "system" },
+  { id: 3, title: "Post-Exam Chill & Rant", type: "Casual", typeClass: "chill", date: "Friday at 6:00 PM", location: "Cafe Coffee Day", hostName: "Riya Shah", hostAv: "RS", hostBg: "var(--yellow)", attendees: 8, maxAttendees: 15, creator: "system" },
+  { id: 4, title: "OS Assignment Collab", type: "Study Session", typeClass: "study", date: "Saturday at 1:00 PM", location: "Hostel B, Common Room", hostName: "Vikram Singh", hostAv: "VS", hostBg: "var(--blue)", attendees: 6, maxAttendees: 10, creator: "system" }
 ];
+
+// ── Persistence ──
+const isLoggedIn = localStorage.getItem('isLoggedIn');
+const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
+const currentUser = isLoggedIn ? (users[isLoggedIn.toLowerCase()] || users[isLoggedIn]) : null;
+
+let ALL_EVENTS = JSON.parse(localStorage.getItem('bridgr_events') || '[]');
+if (ALL_EVENTS.length === 0) {
+  ALL_EVENTS = DEFAULT_EVENTS;
+  localStorage.setItem('bridgr_events', JSON.stringify(ALL_EVENTS));
+}
+
+// Track joined events: email -> [eventIds]
+let JOINED_DATA = JSON.parse(localStorage.getItem('bridgr_joinedEvents') || '{}');
+let myJoinedEvents = isLoggedIn ? (JOINED_DATA[isLoggedIn.toLowerCase()] || []) : [];
+
+function saveEvents() {
+  localStorage.setItem('bridgr_events', JSON.stringify(ALL_EVENTS));
+}
+
+function saveJoined() {
+  if (isLoggedIn) {
+    JOINED_DATA[isLoggedIn.toLowerCase()] = myJoinedEvents;
+    localStorage.setItem('bridgr_joinedEvents', JSON.stringify(JOINED_DATA));
+  }
+}
 
 // ── Render Events Grid ──
 function renderEvents() {
   const grid = document.getElementById('eventsGrid');
   if (!grid) return;
   
-  grid.innerHTML = MOCK_EVENTS.map(ev => `
-    <div class="event-card">
-      <div class="ec-top">
-        <span class="ec-type ${ev.typeClass}">${ev.type}</span>
-        <span class="ec-attendees">👥 ${ev.attendees}/${ev.maxAttendees}</span>
+  grid.innerHTML = ALL_EVENTS.map(ev => {
+    const isCreator = isLoggedIn && ev.creator === isLoggedIn.toLowerCase();
+    const hasJoined = myJoinedEvents.includes(ev.id);
+    
+    return `
+      <div class="event-card ${isCreator ? 'my-event' : ''}">
+        <div class="ec-top">
+          <span class="ec-type ${ev.typeClass}">${ev.type}</span>
+          <span class="ec-attendees">👥 ${ev.attendees}/${ev.maxAttendees}</span>
+        </div>
+        <h3 class="ec-title">${ev.title}</h3>
+        <div class="ec-meta">
+          <div class="ec-meta-item">📅 ${ev.date}</div>
+          <div class="ec-meta-item">📍 ${ev.location}</div>
+        </div>
+        <div class="ec-host">
+          <div class="ec-host-av" style="background:${ev.hostBg}">${ev.hostAv}</div>
+          <div class="ec-host-name">${isCreator ? 'Created by You' : 'Hosted by ' + ev.hostName}</div>
+          ${isCreator ? 
+            `<span class="your-event-badge">Your Event</span>` : 
+            `<button class="btn-join ${hasJoined ? 'joined' : ''}" onclick="joinEvent(${ev.id}, this)">
+              ${hasJoined ? 'Joined ✓' : 'Join'}
+            </button>`
+          }
+        </div>
       </div>
-      <h3 class="ec-title">${ev.title}</h3>
-      <div class="ec-meta">
-        <div class="ec-meta-item">📅 ${ev.date}</div>
-        <div class="ec-meta-item">📍 ${ev.location}</div>
-      </div>
-      <div class="ec-host">
-        <div class="ec-host-av" style="background:${ev.hostBg}">${ev.hostAv}</div>
-        <div class="ec-host-name">Hosted by ${ev.hostName}</div>
-        <button class="btn-join" onclick="joinEvent(this)">Join</button>
-      </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
 }
 
 // ── Interactivity ──
-function joinEvent(btn) {
-  if (btn.textContent === 'Joined ✓') return;
+function joinEvent(eventId, btn) {
+  if (!isLoggedIn) {
+    window.location.href = 'login.html';
+    return;
+  }
+  
+  if (myJoinedEvents.includes(eventId)) return;
+  
+  myJoinedEvents.push(eventId);
+  saveJoined();
+  
+  // Update local count
+  const ev = ALL_EVENTS.find(e => e.id === eventId);
+  if (ev && ev.attendees < ev.maxAttendees) {
+    ev.attendees++;
+    saveEvents();
+  }
+  
   btn.textContent = 'Joined ✓';
-  btn.style.background = 'var(--green)';
-  btn.style.color = '#fff';
-  btn.style.borderColor = 'var(--green)';
+  btn.classList.add('joined');
+  
+  // Refresh to update counts correctly if needed, or just update the UI
+  setTimeout(renderEvents, 500);
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -216,12 +117,18 @@ document.addEventListener('DOMContentLoaded', () => {
   if (hostForm) {
     hostForm.addEventListener('submit', (e) => {
       e.preventDefault();
+      if (!isLoggedIn) {
+        window.location.href = 'login.html';
+        return;
+      }
       
       const title = document.getElementById('evTitle').value;
       const date = document.getElementById('evDate').value;
       const loc = document.getElementById('evLocation').value;
+      const capacity = document.getElementById('evCapacity').value || 10;
       
-      // Simulate adding to grid
+      const initials = currentUser ? currentUser.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase() : 'ME';
+
       const newEvent = {
         id: Date.now(),
         title: title,
@@ -229,14 +136,16 @@ document.addEventListener('DOMContentLoaded', () => {
         typeClass: selectedType.toLowerCase().includes('study') ? 'study' : selectedType.toLowerCase().includes('workshop') ? 'workshop' : 'chill',
         date: date,
         location: loc,
-        hostName: "You",
-        hostAv: "ME",
-        hostBg: "var(--purple)",
+        hostName: currentUser ? currentUser.name : "You",
+        hostAv: initials,
+        hostBg: currentUser ? (currentUser.aura || "var(--purple)") : "var(--purple)",
         attendees: 1,
-        maxAttendees: document.getElementById('evCapacity').value || 10
+        maxAttendees: capacity,
+        creator: isLoggedIn.toLowerCase()
       };
       
-      MOCK_EVENTS.unshift(newEvent);
+      ALL_EVENTS.unshift(newEvent);
+      saveEvents();
       renderEvents();
       
       // Reset form and show modal

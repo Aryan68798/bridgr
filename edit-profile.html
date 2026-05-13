@@ -85,12 +85,13 @@
         setIsSaving(true);
         
         // Get current user data
-        const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
         const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
+        const userKey = isLoggedIn ? isLoggedIn.toLowerCase() : null;
         
-        if (currentUserEmail && users[currentUserEmail]) {
-          users[currentUserEmail] = {
-            ...users[currentUserEmail],
+        if (userKey && users[userKey]) {
+          users[userKey] = {
+            ...users[userKey],
             bio,
             dept,
             year,

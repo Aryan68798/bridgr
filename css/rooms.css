@@ -465,6 +465,21 @@ select {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.your-badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  background: var(--yellow);
+  color: var(--charcoal);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  border: 1px solid var(--charcoal);
 }
 
 .rli-meta {

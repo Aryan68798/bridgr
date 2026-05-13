@@ -1,12 +1,22 @@
 /* ── Bridgr Student Profile ── */
-const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+const isLoggedIn = localStorage.getItem('isLoggedIn');
 const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
-const currentUser = currentUserEmail ? users[currentUserEmail.toLowerCase()] || users[currentUserEmail] : null;
+
+// Validate: isLoggedIn must be a real email (not 'true', 'null', etc.)
+let userKey = null;
+let currentUser = null;
+
+if (isLoggedIn && isLoggedIn !== 'true' && isLoggedIn !== 'null' && isLoggedIn !== 'undefined' && isLoggedIn.trim() !== '') {
+  userKey = isLoggedIn.toLowerCase().trim();
+  currentUser = users[userKey] || null;
+}
 
 // Debugging session
-console.log('Profile Load:', { currentUserEmail, hasUser: !!currentUser, isLoggedIn: localStorage.getItem('isLoggedIn') });
+console.log('[Profile]', { isLoggedIn, userKey, hasUser: !!currentUser });
 
-if (!currentUser || localStorage.getItem('isLoggedIn') !== 'true') {
+if (!currentUser) {
+  // Clean up any garbage session data
+  localStorage.removeItem('isLoggedIn');
   console.warn('Session invalid or missing. Redirecting to login...');
   window.location.href = 'login.html';
 }
@@ -189,10 +199,11 @@ document.getElementById('emSave').addEventListener('click', function () {
   PROFILE.year = parts[1] || PROFILE.year;
 
   // Persist to LocalStorage
-  if (currentUserEmail && users[currentUserEmail]) {
-    users[currentUserEmail].name = name;
-    users[currentUserEmail].dept = PROFILE.dept;
-    users[currentUserEmail].year = PROFILE.year;
+  const userKey = isLoggedIn ? isLoggedIn.toLowerCase() : null;
+  if (userKey && users[userKey]) {
+    users[userKey].name = name;
+    users[userKey].dept = PROFILE.dept;
+    users[userKey].year = PROFILE.year;
     localStorage.setItem('bridgr_users', JSON.stringify(users));
   }
 
@@ -211,16 +222,33 @@ document.getElementById('emSave').addEventListener('click', function () {
 
 // ── Logout ──
 document.getElementById('logoutBtn').addEventListener('click', () => {
-  localStorage.setItem('isLoggedIn', 'false');
-  localStorage.removeItem('bridgr_currentUser');
+  localStorage.removeItem('isLoggedIn');
   window.location.href = 'login.html';
 });
 
 // ── Init Profile Data ──
 function initProfile() {
+  document.title = `${PROFILE.name} — Bridgr Profile`;
   document.getElementById('phName').textContent = PROFILE.name;
-  document.getElementById('phSub').textContent = `${PROFILE.dept} · ${PROFILE.year} · Block A, Room 304`;
   
+  // Dynamic Rank
+  const rankBadge = document.getElementById('phRank');
+  if (PROFILE.cred > 1000) rankBadge.textContent = '🔱 Campus Wizard';
+  else if (PROFILE.cred > 500) rankBadge.textContent = '⚡ Power Helper';
+  else rankBadge.textContent = '🛡️ Rising Star';
+
+  document.getElementById('phSub').textContent = `${PROFILE.dept} · ${PROFILE.year} · Block ${currentUser.block || 'A'}, Room ${currentUser.room || '304'}`;
+  
+  // Dynamic Tags
+  const tagsContainer = document.querySelector('.ph-tags');
+  if (tagsContainer) {
+    tagsContainer.innerHTML = `
+      <span class="ph-tag">⚛️ ${PROFILE.skills[0] || 'Helper'}</span>
+      <span class="ph-tag">📍 ${PROFILE.dept}</span>
+      <span class="ph-tag ph-tag-avail">🟢 Available now</span>
+    `;
+  }
+
   const av = document.getElementById('phAvatar');
   if (PROFILE.avatar) {
     av.style.backgroundImage = `url('${PROFILE.avatar}')`;
@@ -229,7 +257,10 @@ function initProfile() {
     av.innerHTML = '';
   } else {
     av.style.background = PROFILE.aura || 'var(--orange)';
-    const initials = PROFILE.name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+    const parts = PROFILE.name.trim().split(' ');
+    const initials = parts.length >= 2 
+      ? (parts[0][0] + parts[parts.length-1][0]).toUpperCase()
+      : PROFILE.name.substring(0, 2).toUpperCase();
     av.innerHTML = initials;
   }
 

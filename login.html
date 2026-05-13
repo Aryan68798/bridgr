@@ -217,9 +217,8 @@
                 const user = users[email.toLowerCase()];
 
                 if (user && user.password === password) {
-                  localStorage.setItem('bridgr_currentUser', email.toLowerCase());
-                  localStorage.setItem('isLoggedIn', 'true');
-                  window.location.href = 'index.html';
+                  localStorage.setItem('isLoggedIn', email.toLowerCase());
+                  window.location.href = 'profile.html';
                 } else {
                   alert('Invalid email or password. Please try again or create an account!');
                 }
