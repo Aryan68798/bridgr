@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Complete Profile — Bridgr</title>
+  <meta name="description" content="Tell us more about yourself" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700;800&family=Prata&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet" />
+
+  <!-- CDNs -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+  <script>window.framerMotion = window.Motion;</script>
+
+  <!-- Tailwind Config -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            orange: '#ff5e3a',
+            yellow: '#ffc800',
+            blue: '#3b82f6',
+            charcoal: '#111111',
+            bg: '#fbf9f6',
+            purple: '#7c3aed',
+            green: '#16a34a',
+          },
+          fontFamily: {
+            display: ['Prata', 'serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+            sans: ['Satoshi', 'Inter', 'sans-serif'],
+          },
+          boxShadow: {
+            'brutal': '4px 4px 0px #111111',
+            'brutal-lg': '10px 10px 0px #111111',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Grainy Texture */
+    .grain-texture::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none; z-index: 9999;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.05; mix-blend-mode: overlay;
+    }
+
+    body::-webkit-scrollbar { display: none; }
+    body { -ms-overflow-style: none; scrollbar-width: none; background-color: #fbf9f6; }
+    .brutal-border { border: 4px solid #111111; }
+    .brutal-border-thin { border: 2px solid #111111; }
+  </style>
+</head>
+
+<body class="grain-texture">
+  <div id="root" class="w-full min-h-screen"></div>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+    const { motion } = framerMotion;
+
+    const App = () => {
+      const [bio, setBio] = useState('');
+      const [dept, setDept] = useState('Computer Science');
+      const [year, setYear] = useState('2nd Year');
+      const [skills, setSkills] = useState('');
+      const [isSaving, setIsSaving] = useState(false);
+
+      const handleSave = () => {
+        setIsSaving(true);
+        
+        // Get current user data
+        const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+        const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
+        
+        if (currentUserEmail && users[currentUserEmail]) {
+          users[currentUserEmail] = {
+            ...users[currentUserEmail],
+            bio,
+            dept,
+            year,
+            skills: skills.split(',').map(s => s.trim()).filter(s => s),
+            isOnboarded: true
+          };
+          localStorage.setItem('bridgr_users', JSON.stringify(users));
+        }
+
+        setTimeout(() => {
+          window.location.href = 'profile.html';
+        }, 1200);
+      };
+
+      return (
+        <div className="w-full min-h-screen flex flex-col items-center justify-center p-6 md:p-12 relative overflow-hidden">
+          <div className="absolute top-8 left-8 z-50">
+            <a href="index.html" className="text-2xl font-display font-black tracking-tighter">BRIDGR.</a>
+          </div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="w-full max-w-xl bg-white brutal-border shadow-brutal-lg relative z-10 p-8 md:p-12"
+          >
+            <div className="mb-10">
+              <h1 className="text-5xl font-display uppercase leading-[0.9] mb-4">Final<br/>Touches</h1>
+              <div className="h-2 w-20 bg-purple brutal-border-thin"></div>
+              <p className="mt-4 font-mono text-xs font-bold text-charcoal/60 uppercase tracking-widest">Help others find you for the right reasons.</p>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal mb-2 block">Tell your story (Bio)</label>
+                <textarea 
+                  value={bio}
+                  onChange={(e) => setBio(e.target.value)}
+                  placeholder="e.g. 3rd year CS student. I live in Block C and I actually enjoy debugging React hooks."
+                  className="w-full p-4 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/30 focus:bg-purple/5 outline-none transition-all resize-none h-32"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal mb-2 block">Department</label>
+                  <select 
+                    value={dept}
+                    onChange={(e) => setDept(e.target.value)}
+                    className="w-full p-4 bg-white brutal-border-thin text-base font-bold text-charcoal outline-none focus:bg-purple/5 cursor-pointer appearance-none"
+                  >
+                    <option>Computer Science</option>
+                    <option>Electronics</option>
+                    <option>Mechanical</option>
+                    <option>Design</option>
+                    <option>Mathematics</option>
+                    <option>Business</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal mb-2 block">Current Year</label>
+                  <select 
+                    value={year}
+                    onChange={(e) => setYear(e.target.value)}
+                    className="w-full p-4 bg-white brutal-border-thin text-base font-bold text-charcoal outline-none focus:bg-purple/5 cursor-pointer appearance-none"
+                  >
+                    <option>1st Year</option>
+                    <option>2nd Year</option>
+                    <option>3rd Year</option>
+                    <option>4th Year</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal mb-2 block">Skills (Comma separated)</label>
+                <input 
+                  type="text" 
+                  value={skills}
+                  onChange={(e) => setSkills(e.target.value)}
+                  placeholder="React, Python, Figma, DSA..." 
+                  className="w-full p-4 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/30 focus:bg-purple/5 outline-none transition-all"
+                />
+              </div>
+
+              <div className="pt-8">
+                <motion.button 
+                  whileHover={{ translate: '-4px -4px', boxShadow: '8px 8px 0px #111111' }}
+                  whileTap={{ translate: '0 0', boxShadow: '0 0 0 #111111' }}
+                  onClick={handleSave}
+                  disabled={isSaving}
+                  className="w-full h-16 bg-charcoal text-white brutal-border font-extrabold text-xl shadow-brutal transition-all uppercase flex items-center justify-center"
+                >
+                  {isSaving ? 'Finishing...' : 'Enter the Campus ➜'}
+                </motion.button>
+              </div>
+            </div>
+          </motion.div>
+
+          <p className="mt-8 text-[10px] font-mono font-black uppercase tracking-[0.2em] text-charcoal/40">Setup Complete — Initializing Local Profile</p>
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+
+</html>

@@ -211,8 +211,33 @@
 
               <form className="space-y-4" onSubmit={(e) => {
                 e.preventDefault();
+                const name = e.target.elements.fullName.value;
+                const email = e.target.elements.email.value;
+                const password = e.target.elements.password.value;
+                
+                const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
+                
+                // Random stats generated once
+                const stats = {
+                  karma: Math.floor(Math.random() * 500) + 50,
+                  sessions: Math.floor(Math.random() * 20) + 5,
+                  problemsSolved: Math.floor(Math.random() * 15) + 2
+                };
+
+                users[email.toLowerCase()] = {
+                  name,
+                  email: email.toLowerCase(),
+                  password,
+                  stats,
+                  aura: 'linear-gradient(135deg, #fb923c, #9b6dff)',
+                  avatar: null,
+                  isOnboarded: false
+                };
+
+                localStorage.setItem('bridgr_users', JSON.stringify(users));
+                localStorage.setItem('bridgr_currentUser', email.toLowerCase());
                 localStorage.setItem('isLoggedIn', 'true');
-                localStorage.setItem('userName', e.target.elements.fullName.value);
+                
                 window.location.href = 'avatar.html';
               }}>
                 <div className="space-y-1.5">
@@ -229,6 +254,7 @@
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">College Email</label>
                   <input 
+                    name="email"
                     type="email" 
                     placeholder="you@university.edu" 
                     className="w-full py-3 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-blue/5 outline-none transition-all"
@@ -240,6 +266,7 @@
                   <label className="text-[10px] font-mono font-extrabold uppercase tracking-widest text-charcoal">Password</label>
                   <div className="relative">
                     <input 
+                      name="password"
                       type={showPassword ? "text" : "password"} 
                       placeholder="••••••••" 
                       className="w-full py-3 px-5 bg-white brutal-border-thin text-base font-bold text-charcoal placeholder:text-charcoal/40 focus:bg-blue/5 outline-none transition-all"

@@ -197,7 +197,12 @@
       const [aura, setAura] = useState('linear-gradient(135deg, #fb923c, #9b6dff)');
       const [isSaving, setIsSaving] = useState(false);
       const fileInputRef = useRef(null);
-      const [userName, setUserName] = useState(localStorage.getItem('userName') || 'Alex Smith');
+
+      // Get current user info from multi-user storage
+      const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+      const users = JSON.parse(localStorage.getItem('bridgr_users') || '{}');
+      const currentUser = users[currentUserEmail] || { name: 'Alex Smith' };
+      const [userName, setUserName] = useState(currentUser.name);
 
       const getInitials = (name) => {
         const parts = name.trim().split(' ');
@@ -238,8 +243,16 @@
 
       const handleSave = () => {
         setIsSaving(true);
+        
+        // Persist to multi-user storage
+        if (currentUserEmail && users[currentUserEmail]) {
+          users[currentUserEmail].avatar = avatarUrl;
+          users[currentUserEmail].aura = aura;
+          localStorage.setItem('bridgr_users', JSON.stringify(users));
+        }
+
         setTimeout(() => {
-          window.location.href = 'profile.html';
+          window.location.href = 'edit-profile.html';
         }, 1500);
       };
 

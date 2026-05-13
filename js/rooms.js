@@ -41,6 +41,22 @@ let minCap = 2;
 let canvas, ctx, W, H;
 let tick = 0;
 
+// ── Persistence ──
+const currentUserEmail = localStorage.getItem('bridgr_currentUser');
+const savedRooms = JSON.parse(localStorage.getItem('bridgr_rooms') || '[]');
+if (savedRooms && savedRooms.length > 0) {
+  savedRooms.forEach(sr => {
+    const idx = ROOMS.findIndex(r => r.id === sr.id);
+    if (idx !== -1) ROOMS[idx] = sr;
+  });
+} else {
+  localStorage.setItem('bridgr_rooms', JSON.stringify(ROOMS));
+}
+
+function saveRooms() {
+  localStorage.setItem('bridgr_rooms', JSON.stringify(ROOMS));
+}
+
 // ── CLOCK ──
 function updateClock() {
   const now = new Date();
@@ -285,13 +301,37 @@ document.getElementById('bmDurations').addEventListener('click', e => {
 });
 
 document.getElementById('bmConfirm').addEventListener('click', () => {
-  const name = document.getElementById('bmName').value.trim();
-  if (!name) { document.getElementById('bmName').style.borderColor='var(--orange)'; document.getElementById('bmName').focus(); return; }
+  const sessionTitle = document.getElementById('bmName').value.trim();
+  if (!sessionTitle) { document.getElementById('bmName').style.borderColor='var(--orange)'; document.getElementById('bmName').focus(); return; }
+  
+  if (selectedRoom) {
+    selectedRoom.status = 'occupied';
+    selectedRoom.session = sessionTitle;
+    selectedRoom.creator = currentUserEmail;
+    selectedRoom.pinColor = '#f87171'; // Red for occupied
+    
+    // Update the main ROOMS array
+    const idx = ROOMS.findIndex(r => r.id === selectedRoom.id);
+    if (idx !== -1) ROOMS[idx] = selectedRoom;
+    
+    saveRooms();
+  }
+
   const btn = document.getElementById('bmConfirm');
   btn.textContent = '🎉 Room is yours. Don\'t ghost it.';
   btn.style.background = 'linear-gradient(135deg,#34d399,#22d3ee)';
   btn.disabled = true;
-  setTimeout(() => { closeBooking(); btn.textContent='Confirm booking ✓'; btn.style.background=''; btn.disabled=false; }, 2200);
+  
+  setTimeout(() => { 
+    closeBooking(); 
+    btn.textContent='Confirm booking ✓'; 
+    btn.style.background=''; 
+    btn.disabled=false; 
+    renderPins();
+    renderList();
+    updateHud();
+    if (selectedRoom) openRoom(selectedRoom);
+  }, 2200);
 });
 
 document.addEventListener('keydown', e => { if(e.key==='Escape'){closeBooking(); document.getElementById('roomCard').classList.remove('open'); selectedRoom=null; renderPins(); renderList();}});
